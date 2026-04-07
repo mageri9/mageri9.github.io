@@ -24,7 +24,6 @@
             margin: 0 auto;
         }
 
-        /* Header */
         .header {
             text-align: center;
             padding: 40px 20px;
@@ -54,7 +53,6 @@
             border: 1px solid #00d9ff;
         }
 
-        /* Projects */
         .section-title {
             font-size: 1.8rem;
             margin: 30px 0 20px;
@@ -112,7 +110,6 @@
             text-decoration: underline;
         }
 
-        /* Stats */
         .stats {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -138,7 +135,6 @@
             opacity: 0.7;
         }
 
-        /* Contacts */
         .contacts {
             text-align: center;
             margin-top: 40px;
@@ -165,16 +161,34 @@
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
         <div class="header">
             <h1>🔮 Александр</h1>
             <p>Python-разработчик | Telegram Bot Developer</p>
+            <div class="badge">🔥 170+ часов практики | 57 дней</div>
         </div>
 
-        <!-- Projects -->
+        <!-- Статистика -->
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number" id="hours">170+</div>
+                <div class="stat-label">часов разработки</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="users">19</div>
+                <div class="stat-label">пользователей</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="tests">27</div>
+                <div class="stat-label">тестов</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="cards">78</div>
+                <div class="stat-label">карт Таро</div>
+            </div>
+        </div>
+
         <h2 class="section-title">📁 Мои проекты</h2>
 
-        <!-- Tarot Bot -->
         <div class="project">
             <h3>🃏 Tarot Bot — Бот для гадания на Таро</h3>
             <p>Telegram-бот, который ежедневно выдаёт карты дня с прямым и перевёрнутым значением. Есть админ-панель, коллекция рубашек, защита от спама, 27 тестов.</p>
@@ -192,7 +206,6 @@
             </div>
         </div>
 
-        <!-- Stopwatch -->
         <div class="project">
             <h3>⏱️ Stopwatch — Десктопный секундомер</h3>
             <p>Десктопное приложение на Tkinter с архитектурой MVC. Поддерживает круги, статистику, сохранение сессий в JSON.</p>
@@ -207,7 +220,6 @@
             </div>
         </div>
 
-        <!-- Skills -->
         <h2 class="section-title">⚙️ Технологии</h2>
         <div class="project" style="text-align: center;">
             <div class="tech" style="justify-content: center;">
@@ -224,7 +236,6 @@
             </div>
         </div>
 
-        <!-- Contacts -->
         <div class="contacts">
             <h3>📫 Связаться со мной</h3>
             <p>

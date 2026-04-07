@@ -43,16 +43,6 @@
             opacity: 0.9;
         }
 
-        .badge {
-            display: inline-block;
-            background: #00d9ff20;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-top: 15px;
-            border: 1px solid #00d9ff;
-        }
-
         .section-title {
             font-size: 1.8rem;
             margin: 30px 0 20px;
@@ -110,31 +100,6 @@
             text-decoration: underline;
         }
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            margin: 30px 0;
-        }
-
-        .stat-card {
-            background: rgba(255,255,255,0.07);
-            border-radius: 12px;
-            padding: 15px;
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #00d9ff;
-        }
-
-        .stat-label {
-            font-size: 0.8rem;
-            opacity: 0.7;
-        }
-
         .contacts {
             text-align: center;
             margin-top: 40px;
@@ -164,34 +129,13 @@
         <div class="header">
             <h1>🔮 Александр</h1>
             <p>Python-разработчик | Telegram Bot Developer</p>
-            <div class="badge">🔥 170+ часов практики | 57 дней</div>
-        </div>
-
-        <!-- Статистика -->
-        <div class="stats">
-            <div class="stat-card">
-                <div class="stat-number" id="hours">170+</div>
-                <div class="stat-label">часов разработки</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="users">19</div>
-                <div class="stat-label">пользователей</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="tests">27</div>
-                <div class="stat-label">тестов</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number" id="cards">78</div>
-                <div class="stat-label">карт Таро</div>
-            </div>
         </div>
 
         <h2 class="section-title">📁 Мои проекты</h2>
 
         <div class="project">
             <h3>🃏 Tarot Bot — Бот для гадания на Таро</h3>
-            <p>Telegram-бот, который ежедневно выдаёт карты дня с прямым и перевёрнутым значением. Есть админ-панель, коллекция рубашек, защита от спама, 27 тестов.</p>
+            <p>Telegram-бот с полной колодой из 78 карт, поддержкой прямого и перевёрнутого положения, админ-панелью, защитой от спама и тестами.</p>
             <div class="tech">
                 <span>Python 3.13</span>
                 <span>aiogram 3</span>
@@ -208,7 +152,7 @@
 
         <div class="project">
             <h3>⏱️ Stopwatch — Десктопный секундомер</h3>
-            <p>Десктопное приложение на Tkinter с архитектурой MVC. Поддерживает круги, статистику, сохранение сессий в JSON.</p>
+            <p>Десктопное приложение на Tkinter с архитектурой MVC, поддержкой кругов, статистики и сохранением сессий.</p>
             <div class="tech">
                 <span>Python</span>
                 <span>Tkinter</span>
@@ -245,7 +189,7 @@
         </div>
 
         <footer>
-            © 2026 · Построено на крови, поте
+            © 2026
         </footer>
     </div>
 </body>

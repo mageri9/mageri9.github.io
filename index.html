@@ -1,196 +1,211 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Портфолио | Python-разработчик</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+export default function Portfolio() {
+  const projects = [
+    {
+      title: "Organization Structure API",
+      stack: "FastAPI • PostgreSQL • SQLAlchemy • Docker • Alembic",
+      description:
+        "API for hierarchical company structures with recursive department trees, cycle protection, transactional deletion strategies and clean service-layer architecture.",
+      highlights: [
+        "Tree hierarchy + recursive serialization",
+        "Cycle prevention and transactional logic",
+        "Docker + migrations + pytest",
+      ],
+      github: "https://github.com/mageri9/test-task-HITALENT-backend",
+    },
+    {
+      title: "Tarot Magerie Bot",
+      stack: "Python • aiogram • Redis • PostgreSQL • Docker",
+      description:
+        "Async Telegram bot with AI-powered tarot readings, caching, Circuit Breaker protection, admin panel and production-oriented infrastructure.",
+      highlights: [
+        "Redis cache + rate limiting",
+        "Circuit Breaker + AI fallback",
+        "Sentry monitoring + CI/CD",
+      ],
+      github: "https://github.com/mageri9/TAROT_magerie_BOT",
+    },
+    {
+      title: "Timer",
+      stack: "Python • tkinter • pystray • PyInstaller",
+      description:
+        "Minimalist Windows desktop timer with tray support, statistics, portable builds and manual time parsing. Built because modern timer apps somehow need cloud synchronization to count 15 minutes.",
+      highlights: [
+        "System tray integration",
+        "Single-instance protection",
+        "Portable executable build",
+      ],
+      github: "https://github.com/mageri9",
+    },
+  ];
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: #eee;
-            line-height: 1.6;
-            padding: 20px;
-        }
+  const skills = {
+    Backend: ["Python", "FastAPI", "SQLAlchemy", "Go", "REST API"],
+    Databases: ["PostgreSQL", "Redis", "Alembic"],
+    Infrastructure: ["Docker", "GitHub Actions", "Linux"],
+    Other: ["asyncio", "aiogram", "pytest", "loguru"],
+  };
 
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
+  return (
+    <div className="min-h-screen bg-zinc-950 text-zinc-100 px-6 py-10">
+      <div className="max-w-6xl mx-auto">
+        <header className="mb-16 border-b border-zinc-800 pb-10">
+          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+            <div>
+              <p className="text-zinc-500 text-sm tracking-[0.3em] uppercase mb-3">
+                Backend Developer
+              </p>
 
-        .header {
-            text-align: center;
-            padding: 40px 20px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 20px;
-            margin-bottom: 30px;
-        }
+              <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-4">
+                mageri9
+              </h1>
 
-        .header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            color: #00d9ff;
-        }
-
-        .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        .section-title {
-            font-size: 1.8rem;
-            margin: 30px 0 20px;
-            border-left: 4px solid #00d9ff;
-            padding-left: 15px;
-        }
-
-        .project {
-            background: rgba(255,255,255,0.07);
-            border-radius: 16px;
-            padding: 20px;
-            margin-bottom: 20px;
-            transition: transform 0.2s;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .project:hover {
-            transform: translateY(-3px);
-            background: rgba(255,255,255,0.1);
-        }
-
-        .project h3 {
-            color: #00d9ff;
-            margin-bottom: 10px;
-            font-size: 1.4rem;
-        }
-
-        .project .tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 12px 0;
-        }
-
-        .project .tech span {
-            background: #00d9ff20;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            border: 1px solid #00d9ff50;
-        }
-
-        .project-links {
-            margin-top: 15px;
-        }
-
-        .project-links a {
-            color: #00d9ff;
-            text-decoration: none;
-            margin-right: 20px;
-            font-size: 0.9rem;
-        }
-
-        .project-links a:hover {
-            text-decoration: underline;
-        }
-
-        .contacts {
-            text-align: center;
-            margin-top: 40px;
-            padding: 30px;
-            background: rgba(255,255,255,0.05);
-            border-radius: 20px;
-        }
-
-        .contacts a {
-            color: #00d9ff;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.1rem;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px;
-            opacity: 0.5;
-            font-size: 0.8rem;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>🔮 Александр</h1>
-            <p>Python-разработчик | Telegram Bot Developer</p>
-        </div>
-
-        <h2 class="section-title">📁 Мои проекты</h2>
-
-        <div class="project">
-            <h3>🃏 Tarot Bot — Бот для гадания на Таро</h3>
-            <p>Telegram-бот с полной колодой из 78 карт, поддержкой прямого и перевёрнутого положения, админ-панелью, защитой от спама и тестами.</p>
-            <div class="tech">
-                <span>Python 3.13</span>
-                <span>aiogram 3</span>
-                <span>PostgreSQL</span>
-                <span>Docker</span>
-                <span>GitHub Actions</span>
-                <span>pytest</span>
+              <p className="text-zinc-400 max-w-2xl text-lg leading-relaxed">
+                I build practical software: backend APIs, async systems,
+                Telegram bots, desktop tools and infra-aware services.
+                Mostly Python. Occasionally Go. Permanently irritated by
+                software that requires an account just to start a timer.
+              </p>
             </div>
-            <div class="project-links">
-                <a href="https://github.com/mageri9/TAROT_magerie_BOT" target="_blank">📦 GitHub</a>
-                <a href="https://t.me/MyTarotBotMyTarotBot" target="_blank">🤖 Telegram</a>
-            </div>
-        </div>
 
-        <div class="project">
-            <h3>⏱️ Stopwatch — Десктопный секундомер</h3>
-            <p>Десктопное приложение на Tkinter с архитектурой MVC, поддержкой кругов, статистики и сохранением сессий.</p>
-            <div class="tech">
-                <span>Python</span>
-                <span>Tkinter</span>
-                <span>MVC</span>
-                <span>JSON</span>
-            </div>
-            <div class="project-links">
-                <a href="https://github.com/mageri9/time_Tracking" target="_blank">📦 GitHub</a>
-            </div>
-        </div>
+            <div className="flex gap-3 flex-wrap">
+              <a
+                href="https://github.com/mageri9"
+                className="px-5 py-3 rounded-2xl bg-zinc-100 text-zinc-900 font-semibold hover:scale-105 transition"
+              >
+                GitHub
+              </a>
 
-        <h2 class="section-title">⚙️ Технологии</h2>
-        <div class="project" style="text-align: center;">
-            <div class="tech" style="justify-content: center;">
-                <span>Python</span>
-                <span>aiogram 3</span>
-                <span>asyncio</span>
-                <span>PostgreSQL</span>
-                <span>SQLite</span>
-                <span>Docker</span>
-                <span>GitHub Actions</span>
-                <span>pytest</span>
-                <span>Git</span>
-                <span>Tkinter</span>
+              <a
+                href="mailto:koloskovse@icloud.com"
+                className="px-5 py-3 rounded-2xl border border-zinc-700 hover:border-zinc-500 transition"
+              >
+                Contact
+              </a>
             </div>
-        </div>
+          </div>
+        </header>
 
-        <div class="contacts">
-            <h3>📫 Связаться со мной</h3>
-            <p>
-                <a href="https://t.me/mageri9" target="_blank">💬 Telegram</a>
-                <a href="https://github.com/mageri9" target="_blank">📦 GitHub</a>
-            </p>
-        </div>
+        <section className="mb-16">
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-3xl font-bold">Projects</h2>
+            <span className="text-zinc-500 text-sm">
+              Things built instead of touching grass
+            </span>
+          </div>
 
-        <footer>
-            © 2026
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            {projects.map((project) => (
+              <div
+                key={project.title}
+                className="rounded-3xl border border-zinc-800 bg-zinc-900/50 p-7 flex flex-col justify-between hover:border-zinc-700 transition"
+              >
+                <div>
+                  <div className="mb-5">
+                    <h3 className="text-2xl font-bold mb-2">
+                      {project.title}
+                    </h3>
+
+                    <p className="text-zinc-500 text-sm leading-relaxed">
+                      {project.stack}
+                    </p>
+                  </div>
+
+                  <p className="text-zinc-300 leading-relaxed mb-6">
+                    {project.description}
+                  </p>
+
+                  <ul className="space-y-3 mb-8">
+                    {project.highlights.map((item) => (
+                      <li
+                        key={item}
+                        className="text-zinc-400 flex gap-3 items-start"
+                      >
+                        <span className="text-zinc-600">▹</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <a
+                  href={project.github}
+                  className="inline-flex items-center justify-center rounded-2xl border border-zinc-700 px-4 py-3 hover:bg-zinc-800 transition"
+                >
+                  View Project
+                </a>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold mb-8">Tech Stack</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {Object.entries(skills).map(([category, items]) => (
+              <div
+                key={category}
+                className="rounded-3xl border border-zinc-800 bg-zinc-900/50 p-6"
+              >
+                <h3 className="text-xl font-semibold mb-5">{category}</h3>
+
+                <div className="flex flex-wrap gap-2">
+                  {items.map((item) => (
+                    <span
+                      key={item}
+                      className="px-3 py-2 rounded-xl bg-zinc-800 text-zinc-300 text-sm"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="mb-16">
+          <div className="rounded-[2rem] border border-zinc-800 bg-gradient-to-br from-zinc-900 to-zinc-950 p-8 md:p-12">
+            <div className="max-w-3xl">
+              <p className="text-zinc-500 uppercase tracking-[0.25em] text-sm mb-4">
+                Engineering Interests
+              </p>
+
+              <h2 className="text-4xl font-bold mb-6 leading-tight">
+                Async systems, backend architecture, reliability and practical
+                software.
+              </h2>
+
+              <p className="text-zinc-400 text-lg leading-relaxed">
+                Interested in infrastructure-aware backend development,
+                observability, caching strategies, resilient systems and tools
+                that solve actual problems instead of becoming another SaaS
+                dashboard nobody wanted.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <footer className="border-t border-zinc-800 pt-8 flex flex-col md:flex-row gap-4 md:items-center md:justify-between text-zinc-500 text-sm">
+          <p>© 2026 mageri9</p>
+
+          <div className="flex gap-5">
+            <a
+              href="https://github.com/mageri9"
+              className="hover:text-zinc-300 transition"
+            >
+              GitHub
+            </a>
+
+            <a
+              href="https://t.me/mageri9"
+              className="hover:text-zinc-300 transition"
+            >
+              Telegram
+            </a>
+          </div>
         </footer>
+      </div>
     </div>
-</body>
-</html>
+  );
+}

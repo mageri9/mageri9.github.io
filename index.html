@@ -1,211 +1,426 @@
-export default function Portfolio() {
-  const projects = [
-    {
-      title: "Organization Structure API",
-      stack: "FastAPI • PostgreSQL • SQLAlchemy • Docker • Alembic",
-      description:
-        "API for hierarchical company structures with recursive department trees, cycle protection, transactional deletion strategies and clean service-layer architecture.",
-      highlights: [
-        "Tree hierarchy + recursive serialization",
-        "Cycle prevention and transactional logic",
-        "Docker + migrations + pytest",
-      ],
-      github: "https://github.com/mageri9/test-task-HITALENT-backend",
-    },
-    {
-      title: "Tarot Magerie Bot",
-      stack: "Python • aiogram • Redis • PostgreSQL • Docker",
-      description:
-        "Async Telegram bot with AI-powered tarot readings, caching, Circuit Breaker protection, admin panel and production-oriented infrastructure.",
-      highlights: [
-        "Redis cache + rate limiting",
-        "Circuit Breaker + AI fallback",
-        "Sentry monitoring + CI/CD",
-      ],
-      github: "https://github.com/mageri9/TAROT_magerie_BOT",
-    },
-    {
-      title: "Timer",
-      stack: "Python • tkinter • pystray • PyInstaller",
-      description:
-        "Minimalist Windows desktop timer with tray support, statistics, portable builds and manual time parsing. Built because modern timer apps somehow need cloud synchronization to count 15 minutes.",
-      highlights: [
-        "System tray integration",
-        "Single-instance protection",
-        "Portable executable build",
-      ],
-      github: "https://github.com/mageri9",
-    },
-  ];
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mageri9</title>
 
-  const skills = {
-    Backend: ["Python", "FastAPI", "SQLAlchemy", "Go", "REST API"],
-    Databases: ["PostgreSQL", "Redis", "Alembic"],
-    Infrastructure: ["Docker", "GitHub Actions", "Linux"],
-    Other: ["asyncio", "aiogram", "pytest", "loguru"],
-  };
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  return (
-    <div className="min-h-screen bg-zinc-950 text-zinc-100 px-6 py-10">
-      <div className="max-w-6xl mx-auto">
-        <header className="mb-16 border-b border-zinc-800 pb-10">
-          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-            <div>
-              <p className="text-zinc-500 text-sm tracking-[0.3em] uppercase mb-3">
-                Backend Developer
-              </p>
+        html {
+            scroll-behavior: smooth;
+        }
 
-              <h1 className="text-5xl md:text-7xl font-black tracking-tight mb-4">
-                mageri9
-              </h1>
+        body {
+            background: #0a0a0a;
+            color: #f4f4f5;
+            font-family: Inter, Arial, sans-serif;
+            line-height: 1.6;
+        }
 
-              <p className="text-zinc-400 max-w-2xl text-lg leading-relaxed">
-                I build practical software: backend APIs, async systems,
-                Telegram bots, desktop tools and infra-aware services.
-                Mostly Python. Occasionally Go. Permanently irritated by
-                software that requires an account just to start a timer.
-              </p>
-            </div>
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
-            <div className="flex gap-3 flex-wrap">
-              <a
-                href="https://github.com/mageri9"
-                className="px-5 py-3 rounded-2xl bg-zinc-100 text-zinc-900 font-semibold hover:scale-105 transition"
-              >
+        .container {
+            width: 100%;
+            max-width: 1150px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
+
+        .hero {
+            padding: 80px 0;
+            border-bottom: 1px solid #27272a;
+        }
+
+        .tag {
+            color: #71717a;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: clamp(56px, 10vw, 96px);
+            line-height: 1;
+            margin-bottom: 24px;
+            font-weight: 900;
+        }
+
+        .hero p {
+            max-width: 760px;
+            color: #a1a1aa;
+            font-size: 20px;
+        }
+
+        .links {
+            display: flex;
+            gap: 16px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 24px;
+            border-radius: 16px;
+            transition: 0.2s ease;
+            font-weight: 600;
+        }
+
+        .btn-primary {
+            background: #f4f4f5;
+            color: #09090b;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border: 1px solid #3f3f46;
+        }
+
+        .btn-secondary:hover {
+            border-color: #71717a;
+        }
+
+        section {
+            margin-top: 80px;
+        }
+
+        h2 {
+            font-size: 38px;
+            margin-bottom: 32px;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: #111113;
+            border: 1px solid #27272a;
+            border-radius: 28px;
+            padding: 28px;
+            transition: 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: #52525b;
+            transform: translateY(-3px);
+        }
+
+        .card h3 {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+
+        .stack {
+            color: #71717a;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            color: #d4d4d8;
+            margin-bottom: 24px;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 28px;
+        }
+
+        .features li {
+            color: #a1a1aa;
+            margin-bottom: 12px;
+        }
+
+        .features li::before {
+            content: "▹ ";
+            color: #71717a;
+        }
+
+        .card a {
+            display: inline-block;
+            border: 1px solid #3f3f46;
+            padding: 12px 18px;
+            border-radius: 14px;
+            transition: 0.2s ease;
+        }
+
+        .card a:hover {
+            background: #18181b;
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-box {
+            background: #111113;
+            border: 1px solid #27272a;
+            border-radius: 24px;
+            padding: 24px;
+        }
+
+        .skill-box h3 {
+            margin-bottom: 18px;
+            font-size: 22px;
+        }
+
+        .badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .badge {
+            background: #1f1f23;
+            color: #d4d4d8;
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+        }
+
+        .about {
+            background: linear-gradient(to bottom right, #111113, #09090b);
+            border: 1px solid #27272a;
+            border-radius: 32px;
+            padding: 40px;
+        }
+
+        .about p {
+            color: #a1a1aa;
+            font-size: 18px;
+            max-width: 850px;
+        }
+
+        footer {
+            margin-top: 80px;
+            padding-top: 24px;
+            border-top: 1px solid #27272a;
+            color: #71717a;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding-top: 40px;
+            }
+
+            h2 {
+                font-size: 30px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <section class="hero">
+        <div class="tag">Backend Developer</div>
+
+        <h1>mageri9</h1>
+
+        <p>
+            I build practical software: backend APIs, async systems,
+            Telegram bots, desktop tools and infra-aware services.
+            Mostly Python. Occasionally Go.
+            Permanently irritated by software that requires an account
+            just to start a timer.
+        </p>
+
+        <div class="links">
+            <a class="btn btn-primary" href="https://github.com/mageri9" target="_blank">
                 GitHub
-              </a>
+            </a>
 
-              <a
-                href="mailto:koloskovse@icloud.com"
-                className="px-5 py-3 rounded-2xl border border-zinc-700 hover:border-zinc-500 transition"
-              >
-                Contact
-              </a>
-            </div>
-          </div>
-        </header>
+            <a class="btn btn-secondary" href="https://t.me/" target="_blank">
+                Telegram
+            </a>
+        </div>
+    </section>
 
-        <section className="mb-16">
-          <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold">Projects</h2>
-            <span className="text-zinc-500 text-sm">
-              Things built instead of touching grass
-            </span>
-          </div>
+    <section>
+        <h2>Projects</h2>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {projects.map((project) => (
-              <div
-                key={project.title}
-                className="rounded-3xl border border-zinc-800 bg-zinc-900/50 p-7 flex flex-col justify-between hover:border-zinc-700 transition"
-              >
-                <div>
-                  <div className="mb-5">
-                    <h3 className="text-2xl font-bold mb-2">
-                      {project.title}
-                    </h3>
+        <div class="projects">
 
-                    <p className="text-zinc-500 text-sm leading-relaxed">
-                      {project.stack}
-                    </p>
-                  </div>
+            <div class="card">
+                <h3>Organization Structure API</h3>
 
-                  <p className="text-zinc-300 leading-relaxed mb-6">
-                    {project.description}
-                  </p>
-
-                  <ul className="space-y-3 mb-8">
-                    {project.highlights.map((item) => (
-                      <li
-                        key={item}
-                        className="text-zinc-400 flex gap-3 items-start"
-                      >
-                        <span className="text-zinc-600">▹</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                <div class="stack">
+                    FastAPI • PostgreSQL • SQLAlchemy • Docker • Alembic
                 </div>
 
-                <a
-                  href={project.github}
-                  className="inline-flex items-center justify-center rounded-2xl border border-zinc-700 px-4 py-3 hover:bg-zinc-800 transition"
-                >
-                  View Project
+                <div class="description">
+                    API for hierarchical company structures with recursive trees,
+                    cycle protection, transactional deletion strategies
+                    and clean service-layer architecture.
+                </div>
+
+                <ul class="features">
+                    <li>Recursive department trees</li>
+                    <li>Cycle prevention and validation</li>
+                    <li>Docker + migrations + tests</li>
+                </ul>
+
+                <a href="https://github.com/mageri9/test-task-HITALENT-backend" target="_blank">
+                    View Project
                 </a>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-8">Tech Stack</h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {Object.entries(skills).map(([category, items]) => (
-              <div
-                key={category}
-                className="rounded-3xl border border-zinc-800 bg-zinc-900/50 p-6"
-              >
-                <h3 className="text-xl font-semibold mb-5">{category}</h3>
-
-                <div className="flex flex-wrap gap-2">
-                  {items.map((item) => (
-                    <span
-                      key={item}
-                      className="px-3 py-2 rounded-xl bg-zinc-800 text-zinc-300 text-sm"
-                    >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section className="mb-16">
-          <div className="rounded-[2rem] border border-zinc-800 bg-gradient-to-br from-zinc-900 to-zinc-950 p-8 md:p-12">
-            <div className="max-w-3xl">
-              <p className="text-zinc-500 uppercase tracking-[0.25em] text-sm mb-4">
-                Engineering Interests
-              </p>
-
-              <h2 className="text-4xl font-bold mb-6 leading-tight">
-                Async systems, backend architecture, reliability and practical
-                software.
-              </h2>
-
-              <p className="text-zinc-400 text-lg leading-relaxed">
-                Interested in infrastructure-aware backend development,
-                observability, caching strategies, resilient systems and tools
-                that solve actual problems instead of becoming another SaaS
-                dashboard nobody wanted.
-              </p>
             </div>
-          </div>
-        </section>
 
-        <footer className="border-t border-zinc-800 pt-8 flex flex-col md:flex-row gap-4 md:items-center md:justify-between text-zinc-500 text-sm">
-          <p>© 2026 mageri9</p>
+            <div class="card">
+                <h3>Tarot Magerie Bot</h3>
 
-          <div className="flex gap-5">
-            <a
-              href="https://github.com/mageri9"
-              className="hover:text-zinc-300 transition"
-            >
-              GitHub
+                <div class="stack">
+                    Python • aiogram • Redis • PostgreSQL • Docker
+                </div>
+
+                <div class="description">
+                    Async Telegram bot with AI-powered tarot readings,
+                    Redis caching, Circuit Breaker protection,
+                    monitoring and admin panel.
+                </div>
+
+                <ul class="features">
+                    <li>Redis cache + rate limiting</li>
+                    <li>Circuit Breaker + AI fallback</li>
+                    <li>Sentry monitoring + CI/CD</li>
+                </ul>
+
+                <a href="https://github.com/mageri9/TAROT_magerie_BOT" target="_blank">
+                    View Project
+                </a>
+            </div>
+
+            <div class="card">
+                <h3>Timer</h3>
+
+                <div class="stack">
+                    Python • tkinter • pystray • PyInstaller
+                </div>
+
+                <div class="description">
+                    Minimalist desktop timer for Windows with tray support,
+                    session statistics and portable executable build.
+                    Built because modern timer apps somehow became SaaS platforms.
+                </div>
+
+                <ul class="features">
+                    <li>System tray integration</li>
+                    <li>Manual time parsing</li>
+                    <li>Portable .exe build</li>
+                </ul>
+
+                <a href="https://github.com/mageri9" target="_blank">
+                    View Project
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <section>
+        <h2>Tech Stack</h2>
+
+        <div class="skills">
+
+            <div class="skill-box">
+                <h3>Backend</h3>
+
+                <div class="badges">
+                    <div class="badge">Python</div>
+                    <div class="badge">FastAPI</div>
+                    <div class="badge">SQLAlchemy</div>
+                    <div class="badge">Go</div>
+                    <div class="badge">REST API</div>
+                </div>
+            </div>
+
+            <div class="skill-box">
+                <h3>Databases</h3>
+
+                <div class="badges">
+                    <div class="badge">PostgreSQL</div>
+                    <div class="badge">Redis</div>
+                    <div class="badge">Alembic</div>
+                </div>
+            </div>
+
+            <div class="skill-box">
+                <h3>Infrastructure</h3>
+
+                <div class="badges">
+                    <div class="badge">Docker</div>
+                    <div class="badge">GitHub Actions</div>
+                    <div class="badge">Linux</div>
+                </div>
+            </div>
+
+            <div class="skill-box">
+                <h3>Other</h3>
+
+                <div class="badges">
+                    <div class="badge">asyncio</div>
+                    <div class="badge">aiogram</div>
+                    <div class="badge">pytest</div>
+                    <div class="badge">loguru</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="tag">Engineering Interests</div>
+
+        <h2>
+            Async systems, backend architecture,
+            reliability and practical software.
+        </h2>
+
+        <p>
+            Interested in infrastructure-aware backend development,
+            observability, caching strategies, resilient systems
+            and tools that solve actual problems instead of becoming
+            another enterprise dashboard nobody wanted.
+        </p>
+    </section>
+
+    <footer>
+        <div>© 2026 mageri9</div>
+
+        <div>
+            <a href="https://github.com/mageri9" target="_blank">
+                GitHub
             </a>
+        </div>
+    </footer>
 
-            <a
-              href="https://t.me/mageri9"
-              className="hover:text-zinc-300 transition"
-            >
-              Telegram
-            </a>
-          </div>
-        </footer>
-      </div>
-    </div>
-  );
-}
+</div>
+
+</body>
+</html>

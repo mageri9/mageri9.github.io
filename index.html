@@ -248,7 +248,49 @@
     }
 
     .card.featured:hover {
-      box-shadow: 0 10px 40px rgba(79, 70, 229, 0.18);
+      background: linear-gradient(180deg, rgba(79, 70, 229, 0.1), #161920 45%);
+      box-shadow: 0 12px 48px rgba(79, 70, 229, 0.28);
+    }
+
+    /* === ImageBot & Tarot — glow appears only on hover, in their own accent color === */
+    .card.imagebot::before,
+    .card.tarot::before {
+      content: "";
+      position: absolute;
+      inset: -1px;
+      border-radius: 12px;
+      padding: 1px;
+      opacity: 0;
+      transition: opacity 250ms ease-in-out;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .card.imagebot::before {
+      background: linear-gradient(135deg, #3b82f6, #38bdf8, #60a5fa);
+    }
+
+    .card.tarot::before {
+      background: linear-gradient(135deg, #8b5cf6, #a78bfa, #c4b5fd);
+    }
+
+    .card.imagebot:hover::before,
+    .card.tarot:hover::before {
+      opacity: 1;
+    }
+
+    .card.imagebot:hover {
+      border-color: #3b82f6;
+      background: linear-gradient(180deg, rgba(59, 130, 246, 0.1), #161920 45%);
+      box-shadow: 0 12px 48px rgba(59, 130, 246, 0.28);
+    }
+
+    .card.tarot:hover {
+      border-color: #8b5cf6;
+      background: linear-gradient(180deg, rgba(139, 92, 246, 0.1), #161920 45%);
+      box-shadow: 0 12px 48px rgba(139, 92, 246, 0.28);
     }
 
     /* === Sticker (Favorite label) === */

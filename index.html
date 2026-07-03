@@ -1,852 +1,621 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mageri9 — Backend & Automation</title>
-  <meta name="description" content="Проекты mageri9: бэкенд и автоматизация на Python. Telegram-боты, FastAPI, Docker, PostgreSQL, Redis." />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Портфолио mageri9 — разработка высокопроизводительных Telegram-ботов, LLM-систем и автоматизаций на Python.">
+  <meta name="theme-color" content="#0d0f12">
+  <meta property="og:title" content="mageri9 — Backend / Python Developer">
+  <meta property="og:description" content="Портфолио mageri9 — разработка высокопроизводительных Telegram-ботов, LLM-систем и автоматизаций на Python.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d0f12'/%3E%3Cpath d='M16 6l1.8 3.6L22 10.4l-3 2.9.7 4.1L16 15.4 12.3 17.4l.7-4.1-3-2.9 4.2-.8z' fill='%234f46e5'/%3E%3Cpath d='M9 20h14v2H9zm2 4h10v2H11z' fill='%238a94a6'/%3E%3C/svg%3E">
+  <title>mageri9 — Backend / Python Developer</title>
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg:        #09090b;
-      --bg2:       #111113;
-      --border:    #27272a;
-      --border2:   #3f3f46;
-      --text:      #fafafa;
-      --text2:     #a1a1aa;
-      --text3:     #52525b;
-      --text4:     #71717a;
-      --indigo:    #6366f1;
-      --indigo2:   #4f46e5;
-      --tag-bg:    #18181b;
-      --tag-text:  #a1a1aa;
+    /* === Reset & Base === */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
 
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background-color: #0d0f12;
+      color: #f0f2f5;
+      line-height: 1.65;
       font-size: 15px;
-      line-height: 1.6;
       min-height: 100vh;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    a { color: inherit; text-decoration: none; }
-
-    /* ── Layout ── */
-    .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
-
-    /* ── Header ── */
-    header {
-      border-bottom: 1px solid var(--border);
+    /* === Container === */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px;
     }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 16px;
+      }
+    }
+
+    /* === Links === */
+    a {
+      color: #4f46e5;
+      text-decoration: none;
+      transition: color 250ms ease-in-out;
+    }
+
+    a:hover {
+      color: #6366f1;
+    }
+
+    a:focus-visible {
+      outline: 2px solid #4f46e5;
+      outline-offset: 3px;
+      border-radius: 3px;
+    }
+
+    /* === Header / Hero === */
     .hero {
+      text-align: center;
+      padding: 80px 0 60px;
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding: 48px 0 36px;
+      }
+    }
+
+    .hero h1 {
+      font-size: 2.75rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #f0f2f5;
+      margin-bottom: 12px;
+      line-height: 1.15;
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      color: #8a94a6;
+      max-width: 520px;
+      margin: 0 auto 24px;
+      line-height: 1.6;
+    }
+
+    .badge {
+      display: inline-block;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.8rem;
+      color: #8a94a6;
+      background-color: #1a1e28;
+      border: 1px solid #242933;
+      padding: 8px 18px;
+      border-radius: 100px;
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    /* === Section Titles === */
+    .section-title {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #8a94a6;
+      margin-bottom: 28px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #1e222d;
+    }
+
+    /* === Projects Grid === */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* === Card === */
+    .card {
       display: flex;
       flex-direction: column;
-      gap: 28px;
-      padding: 56px 0 52px;
-    }
-    @media (min-width: 640px) {
-      .hero { flex-direction: row; align-items: flex-end; }
+      background-color: #161920;
+      border: 1px solid #242933;
+      border-radius: 12px;
+      padding: 28px 24px 24px;
+      transition: all 250ms ease-in-out;
     }
 
-    .avatar {
-      width: 76px; height: 76px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 30px; font-weight: 700; color: #fff;
-      flex-shrink: 0;
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #333a4a;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-header {
+      margin-bottom: 14px;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 650;
+      color: #f0f2f5;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .card-description {
+      font-size: 0.9rem;
+      color: #8a94a6;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    /* === Card Action Button === */
+    .card-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: #4f46e5;
+      background-color: rgba(79, 70, 229, 0.08);
+      border: 1px solid rgba(79, 70, 229, 0.2);
+      padding: 8px 16px;
+      border-radius: 8px;
+      transition: all 250ms ease-in-out;
+      margin-top: auto;
+      width: fit-content;
+      text-decoration: none;
+    }
+
+    .card-action:hover {
+      background-color: rgba(79, 70, 229, 0.15);
+      border-color: rgba(79, 70, 229, 0.4);
+      color: #6366f1;
+    }
+
+    .card-action:focus-visible {
+      outline: 2px solid #4f46e5;
+      outline-offset: 3px;
+    }
+
+    /* === Details / Architecture Block === */
+    .arch-details {
+      margin-top: 16px;
+      margin-bottom: 4px;
+    }
+
+    .arch-details summary {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.78rem;
+      color: #8a94a6;
+      cursor: pointer;
+      padding: 6px 0;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 250ms ease-in-out;
       user-select: none;
     }
 
-    .hero-info { flex: 1; }
-    .hero-handle {
-      font-size: 12px;
-      color: var(--text3);
-      font-family: 'SF Mono', 'Fira Code', 'Fira Mono', monospace;
-      margin-bottom: 4px;
-    }
-    .hero-title { font-size: 30px; font-weight: 700; letter-spacing: -0.5px; line-height: 1.15; }
-    @media (min-width: 640px) { .hero-title { font-size: 36px; } }
-
-    .hero-desc { margin-top: 8px; color: var(--text2); font-size: 14px; max-width: 520px; }
-
-    .hero-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 8px 16px; border-radius: 10px;
-      font-size: 13px; font-weight: 500;
-      transition: background .15s, color .15s;
-      cursor: pointer;
-    }
-    .btn-dark {
-      background: #27272a; color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .btn-dark:hover { background: #3f3f46; }
-    .btn-ghost {
-      background: var(--bg2); color: var(--text2);
-      border: 1px solid var(--border);
+    .arch-details summary::-webkit-details-marker {
+      display: none;
     }
 
-    /* ── Sections ── */
-    main { padding: 56px 0; display: flex; flex-direction: column; gap: 56px; }
+    .arch-details summary::before {
+      content: "▸";
+      font-size: 0.7rem;
+      transition: transform 250ms ease-in-out;
+      display: inline-block;
+    }
 
-    .section-label {
-      font-size: 11px;
+    .arch-details[open] summary::before {
+      transform: rotate(90deg);
+    }
+
+    .arch-details summary:hover,
+    .arch-details[open] summary {
+      color: #b0b8c9;
+    }
+
+    .arch-content {
+      margin-top: 12px;
+      padding: 16px;
+      background-color: #0f1117;
+      border: 1px solid #1e222d;
+      border-radius: 8px;
+    }
+
+    .arch-stack {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.75rem;
+      color: #6ee7b7;
+      background-color: rgba(110, 231, 183, 0.06);
+      border: 1px solid rgba(110, 231, 183, 0.12);
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin-bottom: 14px;
+      line-height: 1.6;
+      word-break: break-word;
+    }
+
+    .arch-schema {
+      margin-bottom: 14px;
+    }
+
+    .arch-schema pre {
+      margin: 0;
+      overflow-x: auto;
+    }
+
+    .arch-schema code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.72rem;
+      line-height: 1.55;
+      color: #c9d1d9;
+      display: block;
+      white-space: pre;
+    }
+
+    .arch-features {
+      list-style: none;
+      padding: 0;
+    }
+
+    .arch-features li {
+      font-size: 0.82rem;
+      color: #8a94a6;
+      padding: 4px 0 4px 16px;
+      position: relative;
+      line-height: 1.55;
+    }
+
+    .arch-features li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #4f46e5;
+      font-weight: 700;
+    }
+
+    /* === Engineering Profile Section === */
+    .engineering-profile {
+      margin-top: 48px;
+      padding: 32px;
+      background-color: #161920;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      transition: all 250ms ease-in-out;
+    }
+
+    .engineering-profile::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.35), rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.25));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+    }
+
+    .engineering-profile:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px rgba(79, 70, 229, 0.06);
+    }
+
+    .engineering-profile h2 {
+      font-size: 1.2rem;
+      font-weight: 650;
+      color: #f0f2f5;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .engineering-profile p {
+      font-size: 0.9rem;
+      color: #8a94a6;
+      line-height: 1.6;
+      margin-bottom: 20px;
+      max-width: 720px;
+    }
+
+    .github-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #f0f2f5;
+      background: linear-gradient(135deg, #4f46e5, #3b82f6);
+      padding: 10px 22px;
+      border-radius: 8px;
+      transition: all 250ms ease-in-out;
+      text-decoration: none;
+    }
+
+    .github-btn:hover {
+      opacity: 0.88;
+      color: #f0f2f5;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(79, 70, 229, 0.25);
+    }
+
+    .github-btn:focus-visible {
+      outline: 2px solid #6366f1;
+      outline-offset: 3px;
+    }
+
+    /* === Footer === */
+    footer {
+      margin-top: 64px;
+      padding-top: 32px;
+      border-top: 1px solid #1e222d;
+    }
+
+    .footer-title {
+      font-size: 0.75rem;
       font-weight: 600;
-      letter-spacing: .1em;
       text-transform: uppercase;
-      color: var(--text3);
+      letter-spacing: 0.1em;
+      color: #8a94a6;
       margin-bottom: 16px;
     }
 
-    /* ── Stack grid ── */
-    .stack-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-    @media (min-width: 480px) { .stack-grid { grid-template-columns: repeat(4, 1fr); } }
-
-    .stack-item {
-      border: 1px solid var(--border);
-      background: rgba(24,24,27,.4);
-      border-radius: 10px;
-      padding: 12px 14px;
-    }
-    .stack-name { font-size: 13px; font-weight: 500; color: #e4e4e7; }
-    .stack-role { font-size: 11px; color: var(--text3); margin-top: 2px; }
-
-    /* ── Filter tabs ── */
-    .projects-head {
+    .footer-links {
       display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-bottom: 20px;
-    }
-    @media (min-width: 520px) {
-      .projects-head { flex-direction: row; align-items: center; justify-content: space-between; }
-    }
-    .filter-tabs { display: flex; gap: 8px; }
-    .tab {
-      padding: 6px 12px; border-radius: 8px;
-      font-size: 12px; font-weight: 500;
-      cursor: pointer; border: 1px solid var(--border);
-      background: var(--bg2); color: var(--text3);
-      transition: background .15s, color .15s;
-    }
-    .tab:hover { color: #e4e4e7; }
-    .tab.active { background: #3f3f46; color: var(--text); border-color: #52525b; }
-
-    /* ── Projects grid ── */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
-    @media (min-width: 640px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
-
-    /* ── Card ── */
-    .card {
-      border: 1px solid var(--border);
-      background: rgba(24,24,27,.6);
-      border-radius: 14px;
-      display: flex;
-      flex-direction: column;
-      transition: border-color .2s, background .2s;
-    }
-    .card:hover { border-color: #52525b; background: rgba(24,24,27,.9); }
-
-    .card-body { padding: 18px 20px; display: flex; flex-direction: column; gap: 12px; }
-
-    .card-head {
-      display: flex; align-items: flex-start; justify-content: space-between; gap: 10px;
-    }
-    .card-title-row { display: flex; align-items: center; gap: 10px; }
-    .card-emoji { font-size: 22px; line-height: 1; flex-shrink: 0; }
-    .card-name { font-size: 15px; font-weight: 600; color: var(--text); line-height: 1.3; }
-    .card-period { font-size: 11px; color: var(--text3); margin-top: 2px; }
-
-    .badge {
-      font-size: 11px; padding: 2px 8px; border-radius: 20px; white-space: nowrap;
-      font-weight: 500; flex-shrink: 0;
-    }
-    .badge-active  { background: rgba(16,185,129,.15); color: #34d399; border: 1px solid rgba(16,185,129,.35); }
-    .badge-prod    { background: rgba(99,102,241,.15);  color: #a5b4fc; border: 1px solid rgba(99,102,241,.35); }
-    .badge-done    { background: rgba(63,63,70,.4);     color: var(--text4); border: 1px solid var(--border); }
-
-    .card-desc { font-size: 13px; color: #d4d4d8; line-height: 1.6; }
-
-    .tags { display: flex; flex-wrap: wrap; gap: 5px; }
-    .tag {
-      font-size: 11px; padding: 2px 7px; border-radius: 5px;
-      background: var(--tag-bg); color: var(--tag-text);
-      border: 1px solid var(--border);
-      font-family: 'SF Mono', 'Fira Code', monospace;
+      flex-wrap: wrap;
+      gap: 12px 28px;
+      align-items: center;
     }
 
-    /* ── Details toggle ── */
-    .card-details { border-top: 1px solid var(--border); }
-    .details-toggle {
-      width: 100%; padding: 10px 20px;
-      display: flex; align-items: center; justify-content: space-between;
-      font-size: 12px; color: var(--text3);
-      cursor: pointer; background: none; border: none; color: var(--text4);
-      transition: color .15s;
-      text-align: left;
-    }
-    .details-toggle:hover { color: #d4d4d8; }
-    .arrow { transition: transform .2s; display: inline-block; }
-    .arrow.open { transform: rotate(180deg); }
-
-    .details-list { padding: 0 20px 14px; display: none; }
-    .details-list.open { display: block; }
-    .details-list li {
-      display: flex; gap: 8px;
-      font-size: 12px; color: var(--text4);
-      margin-top: 7px; line-height: 1.5;
-    }
-    .details-list li::before {
-      content: "›"; color: var(--text3); flex-shrink: 0; margin-top: 1px;
+    .footer-links a {
+      font-size: 0.88rem;
+      color: #8a94a6;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 250ms ease-in-out;
     }
 
-    /* ── Card footer ── */
-    .card-footer {
-      margin-top: auto;
-      border-top: 1px solid var(--border);
-      padding: 10px 20px;
-    }
-    .gh-link {
-      display: inline-flex; align-items: center; gap: 7px;
-      font-size: 12px; color: var(--text3);
-      transition: color .15s;
-    }
-    .gh-link:hover { color: var(--text); }
-
-    /* ── Activity chart ── */
-    .activity-wrap {
-      border: 1px solid var(--border);
-      background: rgba(24,24,27,.4);
-      border-radius: 14px;
-      padding: 20px;
-      overflow-x: auto;
-    }
-    .chart-months { display: flex; margin-bottom: 4px; }
-    .chart-month-cell {
-      width: 16px; flex-shrink: 0; margin-right: 2px;
-      font-size: 10px; color: var(--text3); text-align: center;
-    }
-    .chart-grid { display: flex; gap: 2px; }
-    .chart-col { display: flex; flex-direction: column; gap: 2px; }
-    .chart-cell {
-      width: 14px; height: 14px; border-radius: 3px;
-      flex-shrink: 0;
-    }
-    .cc-empty   { background: transparent; }
-    .cc-0       { background: #27272a; }
-    .cc-1       { background: #312e81; }
-    .cc-2       { background: #4338ca; }
-    .cc-3       { background: #6366f1; }
-    .cc-4       { background: #818cf8; }
-
-    .chart-legend {
-      display: flex; align-items: center; gap: 6px;
-      margin-top: 10px; font-size: 11px; color: var(--text3);
-    }
-    .legend-cell { width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0; }
-
-    /* ── Stats ── */
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-    @media (min-width: 480px) { .stats-grid { grid-template-columns: repeat(4, 1fr); } }
-
-    .stat-card {
-      border: 1px solid var(--border);
-      background: rgba(24,24,27,.4);
-      border-radius: 10px;
-      padding: 16px 14px;
-      text-align: center;
-    }
-    .stat-val { font-size: 28px; font-weight: 700; color: var(--text); }
-    .stat-lbl { font-size: 11px; color: var(--text3); margin-top: 4px; }
-
-    /* ── Footer ── */
-    footer {
-      border-top: 1px solid var(--border);
-    }
-    .footer-inner {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 10px; padding: 20px 0;
-      font-size: 12px; color: var(--text3);
-    }
-    @media (min-width: 480px) {
-      .footer-inner { flex-direction: row; justify-content: space-between; }
+    .footer-links a:hover {
+      color: #f0f2f5;
     }
 
-    /* ── Hidden (for filter) ── */
-    .card-wrap.hidden { display: none; }
+    .footer-links a:focus-visible {
+      outline: 2px solid #4f46e5;
+      outline-offset: 3px;
+      border-radius: 3px;
+    }
+
+    .footer-copy {
+      margin-top: 28px;
+      padding-bottom: 16px;
+      font-size: 0.75rem;
+      color: #4a5168;
+    }
+
+    /* === Scrollbar === */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #0d0f12;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #2a2f3d;
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3a4050;
+    }
   </style>
 </head>
 <body>
-
-<!-- ═══════════════ HEADER ═══════════════ -->
-<header>
-  <div class="container">
-    <div class="hero">
-      <div class="avatar">M</div>
-      <div class="hero-info">
-        <p class="hero-handle">github.com/mageri9</p>
-        <h1 class="hero-title">Backend &amp; Automation</h1>
-        <p class="hero-desc">
-          Пишу бэкенд и автоматизацию на Python. Telegram-боты, REST API, очереди задач, Docker.
-          Акцент на чистую архитектуру, тесты и понятный код.
-        </p>
-        <div class="hero-btns">
-          <a href="https://github.com/mageri9" target="_blank" rel="noopener" class="btn btn-dark">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-            GitHub профиль
-          </a>
-          <a href="https://t.me/mageri9" target="_blank" rel="noopener" class="btn btn-dark">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.248-1.97 9.289c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L8.32 14.617l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.496.969z"/></svg>
-            Telegram
-          </a>
-          <a href="mailto:koloskovse@icloud.com" class="btn btn-dark">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m2 7 10 7 10-7"/></svg>
-            koloskovse@icloud.com
-          </a>
-          <span class="btn btn-ghost">🐍 Python </span>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
-
-<!-- ═══════════════ MAIN ═══════════════ -->
-<main>
   <div class="container">
 
-    <!-- ── Стек ── -->
-    <section>
-      <p class="section-label">Стек</p>
-      <div class="stack-grid">
-        <div class="stack-item"><div class="stack-name">Python</div><div class="stack-role">основной язык</div></div>
-        <div class="stack-item"><div class="stack-name">FastAPI / aiogram 3</div><div class="stack-role">фреймворки</div></div>
-        <div class="stack-item"><div class="stack-name">PostgreSQL + SQLAlchemy</div><div class="stack-role">реляционные БД</div></div>
-        <div class="stack-item"><div class="stack-name">Redis</div><div class="stack-role">кэш, pub/sub, очереди</div></div>
-        <div class="stack-item"><div class="stack-name">Docker / Docker Compose</div><div class="stack-role">контейнеризация</div></div>
-        <div class="stack-item"><div class="stack-name">pytest</div><div class="stack-role">тесты</div></div>
-        <div class="stack-item"><div class="stack-name">async / asyncio</div><div class="stack-role">асинхронность</div></div>
-        <div class="stack-item"><div class="stack-name">GitHub Actions / CI</div><div class="stack-role">автоматизация</div></div>
-      </div>
-    </section>
+    <!-- ====== HEADER / HERO ====== -->
+    <header class="hero">
+      <h1>mageri9</h1>
+      <p class="hero-subtitle">Разрабатываю Telegram-ботов, автоматизации и LLM-системы</p>
+      <span class="badge" role="presentation">Python • Telegram • LLM • Redis</span>
+    </header>
 
-    <!-- ── Проекты ── -->
-    <section>
-      <div class="projects-head">
-        <p class="section-label" id="proj-count">Проекты (7)</p>
-        <div class="filter-tabs">
-          <button class="tab active" data-filter="all">Все</button>
-          <button class="tab" data-filter="backend">Backend</button>
-          <button class="tab" data-filter="automation">Автоматизация</button>
-        </div>
-      </div>
+    <!-- ====== MAIN CONTENT ====== -->
+    <main>
 
-      <div class="projects-grid" id="projects-grid">
+      <!-- ====== PROJECTS SECTION ====== -->
+      <section aria-label="Проекты">
+        <h2 class="section-title">Проекты</h2>
 
-        <!-- 1. SkillBook I9 -->
-        <div class="card-wrap" data-cat="automation">
-          <div class="card">
-            <div class="card-body">
-              <div class="card-head">
-                <div class="card-title-row">
-                  <span class="card-emoji">🔬</span>
-                  <div>
-                    <div class="card-name">SkillBook I9</div>
-                    <div class="card-period">май — июнь 2026</div>
-                  </div>
+        <div class="projects-grid">
+
+          <!-- CARD 1: Commit Chronicle -->
+          <article class="card">
+            <div class="card-header">
+              <h3 class="card-title">Commit Chronicle</h3>
+            </div>
+            <p class="card-description">Telegram-бот для глубокого анализа активности GitHub-аккаунтов. По одной команде собирает коммиты, формирует сводку и генерирует ультра-сжатый JSON-файл для последующей передачи в LLM.</p>
+
+            <details class="arch-details">
+              <summary>⚙ Архитектура</summary>
+              <div class="arch-content">
+                <div class="arch-stack">Python 3.11 • python-telegram-bot • arq • Redis • SQLite + SQLAlchemy Core</div>
+                <div class="arch-schema">
+                  <pre><code>Telegram (/analyze)
+      │
+      ▼
+ Redis Queue
+      │
+      ▼
+    Worker
+      │
+      ▼
+ JSON Optimizer
+      │
+      ▼
+ Redis Pub/Sub
+      │
+      ▼
+ Telegram Chat</code></pre>
                 </div>
-                <span class="badge badge-active">В разработке</span>
+                <ul class="arch-features">
+                  <li>Дедупликация кэша по SHA256 (отдача данных без повторных запросов к API).</li>
+                  <li>Сжатие результирующего JSON на 55-60% (экономия токенов контекста LLM).</li>
+                  <li>Round-robin ротация токенов доступа к GitHub с обработкой лимитов (Rate Limit).</li>
+                  <li>Recovery-механизм для восстановления зависших задач при перезапуске воркера.</li>
+                </ul>
               </div>
-              <p class="card-desc">
-                Telegram-бот, анализирующий GitHub-профиль: собирает коммиты через API, обрабатывает воркером arq,
-                кэширует в Redis, хранит историю в SQLite. Бот сам уведомляет через pub/sub когда анализ готов.
-              </p>
-              <div class="tags">
-                <span class="tag">Python</span><span class="tag">Telegram Bot</span><span class="tag">GitHub API</span>
-                <span class="tag">Redis</span><span class="tag">SQLite</span><span class="tag">arq</span>
-                <span class="tag">Pydantic</span><span class="tag">async</span>
-              </div>
-            </div>
-            <div class="card-details">
-              <button class="details-toggle" onclick="toggleDetails(this)">
-                <span>Технические детали (5)</span>
-                <span class="arrow">▾</span>
-              </button>
-              <ul class="details-list">
-                <li>Token Rotator — round-robin по нескольким GitHub-токенам, потокобезопасно</li>
-                <li>Дедупликация запросов: cache → existing → create</li>
-                <li>Redis pub/sub для push-уведомлений без поллинга</li>
-                <li>Compact JSON формат: минус 40% размера для передачи в LLM</li>
-                <li>Восстановление зависших задач при рестарте воркера</li>
-              </ul>
-            </div>
-            <div class="card-footer">
-              <a href="https://github.com/mageri9/skillbookI9" target="_blank" rel="noopener" class="gh-link">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                Смотреть на GitHub
-              </a>
-            </div>
-          </div>
-        </div>
+            </details>
 
-        <!-- 2. TAROT Oracle Bot -->
-        <div class="card-wrap" data-cat="backend">
-          <div class="card">
-            <div class="card-body">
-              <div class="card-head">
-                <div class="card-title-row">
-                  <span class="card-emoji">🔮</span>
-                  <div>
-                    <div class="card-name">TAROT Oracle Bot</div>
-                    <div class="card-period">апр — май 2026</div>
-                  </div>
+            <a class="card-action" href="https://t.me/commit_chronicle_bot" target="_blank" rel="noopener noreferrer" aria-label="Открыть Commit Chronicle в Telegram">↗ Открыть</a>
+          </article>
+
+          <!-- CARD 2: ImageBot -->
+          <article class="card">
+            <div class="card-header">
+              <h3 class="card-title">ImageBot</h3>
+            </div>
+            <p class="card-description">Легкий бот для генерации и редактирования изображений по текстовым промтам и фотографиям с поддержкой нескольких провайдеров.</p>
+
+            <details class="arch-details">
+              <summary>⚙ Архитектура</summary>
+              <div class="arch-content">
+                <div class="arch-stack">Python • Aiogram 3 • SQLite (aiosqlite) • Redis (FSM) • Docker</div>
+                <div class="arch-schema">
+                  <pre><code> Пользователь
+      │
+      ▼
+Aiogram (FSM in Redis)
+      │
+      ▼
+Provider Router
+  ├── OpenAI API
+  └── GenAPI
+      │
+      ▼
+Image Stitcher
+      │
+      ▼
+ Provider API
+      │
+      ▼
+ Output Sent</code></pre>
                 </div>
-                <span class="badge badge-prod">В продакшне</span>
+                <ul class="arch-features">
+                  <li>Whitelist-доступ на уровне БД и гибкие посуточные лимиты генерации (сброс без cron).</li>
+                  <li>Динамическое переключение API-провайдеров на лету без перезапуска контейнера.</li>
+                  <li>Горизонтальная склейка нескольких изображений в панораму для обхода ограничений API на отправку массивов файлов.</li>
+                </ul>
               </div>
-              <p class="card-desc">
-                Продакшн Telegram-бот для гадания на таро с AI-оракулом. Пользователь задаёт контекст,
-                бот вытягивает карту и генерирует трактовку через LLM (Gemma 4 via AITUNNEL) с RAG —
-                значения карт берутся из базы.
-              </p>
-              <div class="tags">
-                <span class="tag">Python</span><span class="tag">aiogram 3</span><span class="tag">PostgreSQL</span>
-                <span class="tag">Redis</span><span class="tag">SQLAlchemy</span><span class="tag">Sentry</span>
-                <span class="tag">Docker</span><span class="tag">Gemma AI</span><span class="tag">RAG</span>
-              </div>
-            </div>
-            <div class="card-details">
-              <button class="details-toggle" onclick="toggleDetails(this)">
-                <span>Технические детали (7)</span>
-                <span class="arrow">▾</span>
-              </button>
-              <ul class="details-list">
-                <li>Circuit Breaker + Fallback для AI — бот не падает если LLM недоступна</li>
-                <li>Redis-кэш ответов оракула, singleton-клиент</li>
-                <li>Rate limiter на основе asyncio event loop time</li>
-                <li>Атомарный UPSERT — защита от race condition</li>
-                <li>Async backup БД с Redis-локом, мониторинг через Sentry</li>
-                <li>Ruff + pre-commit + CI в GitHub Actions</li>
-                <li>Тесты: handlers, CRUD, AI-сервис, кэш</li>
-              </ul>
-            </div>
-            <div class="card-footer">
-              <a href="https://github.com/mageri9/TAROT_magerie_BOT" target="_blank" rel="noopener" class="gh-link">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                Смотреть на GitHub
-              </a>
-            </div>
-          </div>
-        </div>
+            </details>
 
-        <!-- 3. HITALENT Backend -->
-        <div class="card-wrap" data-cat="backend">
-          <div class="card">
-            <div class="card-body">
-              <div class="card-head">
-                <div class="card-title-row">
-                  <span class="card-emoji">🏢</span>
-                  <div>
-                    <div class="card-name">HITALENT Backend</div>
-                    <div class="card-period">май 2026 · тестовое задание</div>
-                  </div>
+            <a class="card-action" href="https://t.me/m9_imagebot" target="_blank" rel="noopener noreferrer" aria-label="Открыть ImageBot в Telegram">↗ Открыть</a>
+          </article>
+
+          <!-- CARD 3: Tarot Magerie Bot -->
+          <article class="card">
+            <div class="card-header">
+              <h3 class="card-title">Tarot Magerie Bot</h3>
+            </div>
+            <p class="card-description">Асинхронный бот для гадания на картах Таро с интегрированным AI-Оракулом, интерпретирующим расклады на основе контекста и настроения пользователя.</p>
+
+            <details class="arch-details">
+              <summary>⚙ Архитектура</summary>
+              <div class="arch-content">
+                <div class="arch-stack">Python 3.12 • Aiogram 3 • PostgreSQL (Alembic) • Redis (кэш/лимиты) • Gemma 4 API • Sentry</div>
+                <div class="arch-schema">
+                  <pre><code>  Card Spread
+      │
+      ▼
+RAG Query (78 Cards)
+      │
+      ▼
+AI Interpretation
+      │
+      ▼
+  Redis Cache (TTL)
+ └── CircuitBreaker Fallback (on API failure)
+      │
+      ▼
+ User Response</code></pre>
                 </div>
-                <span class="badge badge-done">Завершено</span>
+                <ul class="arch-features">
+                  <li>Паттерн Circuit Breaker для ИИ: автоматическая блокировка запросов к API при сбоях провайдера и переключение на fallback-сценарии.</li>
+                  <li>Интеллектуальное кэширование ответов Оракула в Redis для снижения затрат на LLM.</li>
+                  <li>Изолированный RAG-контекст: история и настроение пользователя дополняют системный промт.</li>
+                  <li>Встроенный асинхронный бэкап базы данных (pg_dump) с распределенной блокировкой в Redis.</li>
+                </ul>
               </div>
-              <p class="card-desc">
-                REST API для управления иерархией отделов и сотрудников на FastAPI + PostgreSQL.
-                Транзакционный service layer, защита от циклов при перемещении узлов, cascade/reassign при удалении.
-              </p>
-              <div class="tags">
-                <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">PostgreSQL</span>
-                <span class="tag">SQLAlchemy 2.0</span><span class="tag">Alembic</span>
-                <span class="tag">Docker</span><span class="tag">pytest</span><span class="tag">Pydantic v2</span>
-              </div>
-            </div>
-            <div class="card-details">
-              <button class="details-toggle" onclick="toggleDetails(this)">
-                <span>Технические детали (6)</span>
-                <span class="arrow">▾</span>
-              </button>
-              <ul class="details-list">
-                <li>Дерево отделов с защитой от циклов при перемещении</li>
-                <li>Cascade delete + reassign: дочерние отделы/сотрудники переназначаются при удалении</li>
-                <li>Уникальность имён в рамках одного родительского отдела</li>
-                <li>Транзакционный service layer, централизованная обработка ошибок</li>
-                <li>Интеграционные тесты на реальной PostgreSQL через Docker</li>
-                <li>Подробный README: архитектура, примеры API, решения</li>
-              </ul>
-            </div>
-            <div class="card-footer">
-              <a href="https://github.com/mageri9/test-task-HITALENT-backend" target="_blank" rel="noopener" class="gh-link">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                Смотреть на GitHub
-              </a>
-            </div>
-          </div>
+            </details>
+
+            <a class="card-action" href="https://t.me/MyTarotBotMyTarotBot" target="_blank" rel="noopener noreferrer" aria-label="Открыть Tarot Magerie Bot в Telegram">↗ Открыть</a>
+          </article>
+
         </div>
+      </section>
 
-        <!-- 4. TG Photo & Video Bot -->
-        <div class="card-wrap" data-cat="automation">
-          <div class="card">
-            <div class="card-body">
-              <div class="card-head">
-                <div class="card-title-row">
-                  <span class="card-emoji">🎬</span>
-                  <div>
-                    <div class="card-name">TG Photo &amp; Video Bot</div>
-                    <div class="card-period">июнь 2026</div>
-                  </div>
-                </div>
-                <span class="badge badge-done">Завершено</span>
-              </div>
-              <p class="card-desc">
-                Telegram-бот для генерации фото и видео через AI (gen-api.ru). Команды /photo, /video, /stats.
-                Видео — Ken Burns эффект с 7 пресетами. Весь I/O асинхронный через aiohttp.
-              </p>
-              <div class="tags">
-                <span class="tag">Python</span><span class="tag">aiogram</span><span class="tag">aiohttp</span>
-                <span class="tag">moviepy</span><span class="tag">gen-api.ru</span><span class="tag">async</span>
-              </div>
-            </div>
-            <div class="card-details">
-              <button class="details-toggle" onclick="toggleDetails(this)">
-                <span>Технические детали (5)</span>
-                <span class="arrow">▾</span>
-              </button>
-              <ul class="details-list">
-                <li>Async polling статуса задачи генерации (aiohttp)</li>
-                <li>Ken Burns: 7 анимационных пресетов через moviepy</li>
-                <li>Подсчёт стоимости перевода (0.0235₽/слово)</li>
-                <li>asyncio.to_thread для CPU-bound рендеринга видео</li>
-                <li>Статистика затрат в /stats</li>
-              </ul>
-            </div>
-            <div class="card-footer">
-              <a href="https://github.com/mageri9/tg-photo-video-bot" target="_blank" rel="noopener" class="gh-link">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                Смотреть на GitHub
-              </a>
-            </div>
-          </div>
+      <!-- ====== ENGINEERING PROFILE ====== -->
+      <section aria-label="Инженерный профиль">
+        <div class="engineering-profile">
+          <h2>📦 Проекты и кодовая база</h2>
+          <p>Публичные репозитории, шаблоны чистой архитектуры (aiogram/PTB), Docker-конфигурации и примеры реализации отказоустойчивых систем.</p>
+          <a class="github-btn" href="https://github.com/mageri9" target="_blank" rel="noopener noreferrer" aria-label="Открыть GitHub профиль mageri9">💻 GitHub</a>
         </div>
+      </section>
 
-        <!-- 5. Effective Mobile -->
-        <div class="card-wrap" data-cat="backend">
-          <div class="card">
-            <div class="card-body">
-              <div class="card-head">
-                <div class="card-title-row">
-                  <span class="card-emoji">🐳</span>
-                  <div>
-                    <div class="card-name">Effective Mobile</div>
-                    <div class="card-period">апр 2026 · тестовое задание</div>
-                  </div>
-                </div>
-                <span class="badge badge-done">Завершено</span>
-              </div>
-              <p class="card-desc">
-                Python HTTP-сервер за nginx reverse proxy в Docker Compose.
-                Non-root пользователь, healthcheck, .env конфигурация.
-              </p>
-              <div class="tags">
-                <span class="tag">Python</span><span class="tag">Docker</span>
-                <span class="tag">nginx</span><span class="tag">HTTP Server</span>
-              </div>
-            </div>
-            <div class="card-details">
-              <button class="details-toggle" onclick="toggleDetails(this)">
-                <span>Технические детали (3)</span>
-                <span class="arrow">▾</span>
-              </button>
-              <ul class="details-list">
-                <li>Docker Compose: backend + nginx reverse proxy</li>
-                <li>Non-root пользователь в контейнере</li>
-                <li>Healthcheck для автоматического рестарта</li>
-              </ul>
-            </div>
-            <div class="card-footer">
-              <a href="https://github.com/mageri9/effective-mobile-test" target="_blank" rel="noopener" class="gh-link">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                Смотреть на GitHub
-              </a>
-            </div>
-          </div>
-        </div>
+    </main>
 
-        <!-- 6. Time Tracking -->
-        <div class="card-wrap" data-cat="automation">
-          <div class="card">
-            <div class="card-body">
-              <div class="card-head">
-                <div class="card-title-row">
-                  <span class="card-emoji">⏱️</span>
-                  <div>
-                    <div class="card-name">Time Tracking</div>
-                    <div class="card-period">апр — май 2026</div>
-                  </div>
-                </div>
-                <span class="badge badge-done">Завершено</span>
-              </div>
-              <p class="card-desc">
-                Desktop-приложение для Windows: таймер с системным треем, автозапуском и автодетектом процесса
-                League of Legends. Единственный экземпляр через lock-файл. Сборка в .exe через PyInstaller.
-              </p>
-              <div class="tags">
-                <span class="tag">Python</span><span class="tag">tkinter</span><span class="tag">pystray</span>
-                <span class="tag">psutil</span><span class="tag">PyInstaller</span><span class="tag">Windows</span>
-              </div>
-            </div>
-            <div class="card-details">
-              <button class="details-toggle" onclick="toggleDetails(this)">
-                <span>Технические детали (5)</span>
-                <span class="arrow">▾</span>
-              </button>
-              <ul class="details-list">
-                <li>Системный трей (pystray) + tray-уведомления</li>
-                <li>Auto start/stop по процессу LeagueOfLegends.exe (psutil)</li>
-                <li>Single instance lock + --minimized флаг</li>
-                <li>Статистика: сегодня / неделя / всего; темизация</li>
-                <li>One-click setup.bat для не-программистов; unit-тесты</li>
-              </ul>
-            </div>
-            <div class="card-footer">
-              <a href="https://github.com/mageri9/time_Tracking" target="_blank" rel="noopener" class="gh-link">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                Смотреть на GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <!-- 7. Tarot Parser -->
-        <div class="card-wrap" data-cat="automation">
-          <div class="card">
-            <div class="card-body">
-              <div class="card-head">
-                <div class="card-title-row">
-                  <span class="card-emoji">📜</span>
-                  <div>
-                    <div class="card-name">Tarot Parser</div>
-                    <div class="card-period">март 2026</div>
-                  </div>
-                </div>
-                <span class="badge badge-done">Завершено</span>
-              </div>
-              <p class="card-desc">
-                Утилита для парсинга данных о картах таро — база для TAROT Oracle Bot.
-              </p>
-              <div class="tags">
-                <span class="tag">Python</span><span class="tag">Parser</span>
-              </div>
-            </div>
-            <div class="card-footer">
-              <a href="https://github.com/mageri9/tarot_parser" target="_blank" rel="noopener" class="gh-link">
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-                Смотреть на GitHub
-              </a>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /projects-grid -->
-    </section>
-
-    <!-- ── Активность ── -->
-    <section>
-      <p class="section-label">Активность (последние 24 недели)</p>
-      <div class="activity-wrap">
-        <div id="activity-months" class="chart-months"></div>
-        <div id="activity-grid" class="chart-grid"></div>
-        <div class="chart-legend">
-          <span>меньше</span>
-          <div class="legend-cell cc-0"></div>
-          <div class="legend-cell cc-1"></div>
-          <div class="legend-cell cc-2"></div>
-          <div class="legend-cell cc-3"></div>
-          <div class="legend-cell cc-4"></div>
-          <span>больше</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ── В цифрах ── -->
-    <section>
-      <p class="section-label">В цифрах</p>
-      <div class="stats-grid">
-        <div class="stat-card"><div class="stat-val">7</div><div class="stat-lbl">Проектов</div></div>
-        <div class="stat-card"><div class="stat-val">1</div><div class="stat-lbl">В продакшне</div></div>
-        <div class="stat-card"><div class="stat-val">2</div><div class="stat-lbl">Тестовых задания</div></div>
-        <div class="stat-card"><div class="stat-val">1</div><div class="stat-lbl">Активных сейчас</div></div>
-      </div>
-    </section>
+    <!-- ====== FOOTER ====== -->
+    <footer>
+      <h2 class="footer-title">Контакты</h2>
+      <nav class="footer-links" aria-label="Контактные ссылки">
+        <a href="mailto:koloskovse@icloud.com" aria-label="Написать на email">✉ koloskovse@icloud.com</a>
+        <a href="https://t.me/mageri9" target="_blank" rel="noopener noreferrer" aria-label="Написать в Telegram">💬 @mageri9</a>
+      </nav>
+      <p class="footer-copy">© 2025 mageri9</p>
+    </footer>
 
   </div>
-</main>
-
-<!-- ═══════════════ FOOTER ═══════════════ -->
-<footer>
-  <div class="container">
-    <div class="footer-inner">
-      <span>mageri9 · 2026</span>
-      <a href="https://github.com/mageri9" target="_blank" rel="noopener" class="gh-link">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-        github.com/mageri9
-      </a>
-    </div>
-  </div>
-</footer>
-
-<script>
-// ─── Details toggle ───────────────────────────────────────────────────────────
-function toggleDetails(btn) {
-  var list  = btn.nextElementSibling;
-  var arrow = btn.querySelector('.arrow');
-  var isOpen = list.classList.contains('open');
-  list.classList.toggle('open', !isOpen);
-  arrow.classList.toggle('open', !isOpen);
-}
-
-// ─── Filter tabs ──────────────────────────────────────────────────────────────
-(function () {
-  var tabs  = document.querySelectorAll('.tab');
-  var cards = document.querySelectorAll('.card-wrap');
-  var count = document.getElementById('proj-count');
-
-  tabs.forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      tabs.forEach(function (t) { t.classList.remove('active'); });
-      tab.classList.add('active');
-
-      var filter = tab.dataset.filter;
-      var visible = 0;
-
-      cards.forEach(function (card) {
-        var show = filter === 'all' || card.dataset.cat === filter;
-        card.classList.toggle('hidden', !show);
-        if (show) visible++;
-      });
-
-      count.textContent = 'Проекты (' + visible + ')';
-    });
-  });
-})();
-
-// ─── Activity chart ───────────────────────────────────────────────────────────
-(function () {
-  var ACTIVITY = {
-    '2026-03-28': 1,
-    '2026-04-07': 5,
-    '2026-04-08': 1,
-    '2026-04-17': 1,
-    '2026-04-18': 1,
-    '2026-04-21': 4,
-    '2026-04-22': 8,
-    '2026-04-23': 7,
-    '2026-04-25': 7,
-    '2026-04-26': 20,
-    '2026-04-27': 1,
-    '2026-05-07': 2,
-    '2026-05-13': 5,
-    '2026-05-14': 12,
-    '2026-05-15': 10,
-    '2026-05-17': 2,
-    '2026-05-19': 3,
-    '2026-05-20': 3,
-    '2026-05-21': 14,
-    '2026-05-22': 5,
-    '2026-05-29': 2,
-    '2026-05-30': 5,
-    '2026-06-01': 12,
-    '2026-06-02': 8,
-    '2026-06-04': 4,
-    '2026-06-06': 5,
-    '2026-06-11': 5,
-    '2026-06-13': 20,
-    '2026-06-18': 6,
-  };
-
-  var MONTHS_RU = ['янв','фев','мар','апр','май','июн','июл','авг','сен','окт','ноя','дек'];
-  var MAX_COUNT = 20;
-  var WEEKS = 24;
-
-  // Find Monday WEEKS weeks ago
-  var today = new Date('2026-06-18');
-  var start = new Date(today);
-  start.setDate(start.getDate() - WEEKS * 7 + 1);
-  // align to Monday
-  var dow = start.getDay() === 0 ? 6 : start.getDay() - 1;
-  start.setDate(start.getDate() - dow);
-
-  // Build week columns
-  var gridEl   = document.getElementById('activity-grid');
-  var monthsEl = document.getElementById('activity-months');
-
-  var cur = new Date(start);
-  var colIndex = 0;
-
-  while (cur <= today || colIndex % 7 !== 0) {
-    if (colIndex % 7 === 0) {
-      // New week column
-      var col = document.createElement('div');
-      col.className = 'chart-col';
-      gridEl.appendChild(col);
-
-      // Month label cell
-      var mCell = document.createElement('div');
-      mCell.className = 'chart-month-cell';
-      // Show month name on first week of month
-      var firstDayOfWeek = new Date(cur);
-      if (firstDayOfWeek <= today && firstDayOfWeek.getDate() <= 7) {
-        mCell.textContent = MONTHS_RU[firstDayOfWeek.getMonth()];
-      }
-      monthsEl.appendChild(mCell);
-    }
-
-    var col = gridEl.lastElementChild;
-    var cell = document.createElement('div');
-    cell.className = 'chart-cell';
-
-    if (cur > today) {
-      cell.classList.add('cc-empty');
-    } else {
-      var key = cur.toISOString().slice(0,10);
-      var count = ACTIVITY[key] || 0;
-      if (count === 0) cell.classList.add('cc-0');
-      else if (count / MAX_COUNT < 0.2) cell.classList.add('cc-1');
-      else if (count / MAX_COUNT < 0.45) cell.classList.add('cc-2');
-      else if (count / MAX_COUNT < 0.7) cell.classList.add('cc-3');
-      else cell.classList.add('cc-4');
-
-      if (count > 0) cell.title = key + ': ' + count + ' коммит(ов)';
-    }
-
-    col.appendChild(cell);
-
-    cur.setDate(cur.getDate() + 1);
-    colIndex++;
-
-    if (colIndex >= WEEKS * 7) break;
-  }
-})();
-</script>
-
 </body>
 </html>

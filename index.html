@@ -8,7 +8,7 @@
   <meta property="og:title" content="mageri9 — Backend / Python Developer">
   <meta property="og:description" content="Портфолио mageri9 — разработка высокопроизводительных Telegram-ботов, LLM-систем и автоматизаций на Python.">
   <meta property="og:type" content="website">
-  <link class="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d0f12'/%3E%3Cpath d='M16 6l1.8 3.6L22 10.4l-3 2.9.7 4.1L16 15.4 12.3 17.4l.7-4.1-3-2.9 4.2-.8z' fill='%234f46e5'/%3E%3Cpath d='M9 20h14v2H9zm2 4h10v2H11z' fill='%238a94a6'/%3E%3C/svg%3E">
+  <link class="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d0f12'/%3E%3Cpath d='M16 6l1.8 3.6L22 10.4l-3 2.9.7 4.1L16 15.4 12.3 17.4l.7-4.1-3-2.9 4.2-.8z' fill='%23ffffff'/%3E%3Cpath d='M9 20h14v2H9zm2 4h10v2H11z' fill='%238a94a6'/%3E%3C/svg%3E">
   <title>mageri9 — Backend / Python Developer</title>
   <style>
     /* === Reset & Base === */
@@ -70,17 +70,17 @@
 
     /* === Links === */
     a {
-      color: #4f46e5;
+      color: #b7c0d1;
       text-decoration: none;
       transition: color 250ms ease-in-out;
     }
 
     a:hover {
-      color: #6366f1;
+      color: #ffffff;
     }
 
     a:focus-visible {
-      outline: 2px solid #4f46e5;
+      outline: 2px solid #ffffff;
       outline-offset: 3px;
       border-radius: 3px;
     }
@@ -127,7 +127,7 @@
       line-height: 1.6;
     }
 
-    /* === Кнопки контактов в стиле карточек === */
+    /* === Кнопки контактов === */
     .hero-socials {
       display: flex;
       justify-content: center;
@@ -169,51 +169,23 @@
       -webkit-mask-composite: xor;
       mask-composite: exclude;
       pointer-events: none;
+      background: linear-gradient(135deg, #ffffff, #cbd5e1, #ffffff);
     }
 
     .social-icon:hover {
       transform: translateY(-3px);
+      border-color: #ffffff;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.1), #161920 45%);
+      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.18);
+      color: #ffffff;
     }
 
     .social-icon:hover::before {
       opacity: 1;
     }
 
-    /* Telegram (Голубой) */
-    .social-icon.tg::before {
-      background: linear-gradient(135deg, #2aabee, #229ed9, #38bdf8);
-    }
-    .social-icon.tg:hover {
-      border-color: #2aabee;
-      background: linear-gradient(180deg, rgba(42, 171, 238, 0.1), #161920 45%);
-      box-shadow: 0 8px 24px rgba(42, 171, 238, 0.2);
-      color: #2aabee;
-    }
-
-    /* GitHub (Пурпурный / Фиолетовый) */
-    .social-icon.gh::before {
-      background: linear-gradient(135deg, #8b5cf6, #a78bfa, #c4b5fd);
-    }
-    .social-icon.gh:hover {
-      border-color: #8b5cf6;
-      background: linear-gradient(180deg, rgba(139, 92, 246, 0.1), #161920 45%);
-      box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
-      color: #a78bfa;
-    }
-
-    /* Почта (Индиго / Синий) */
-    .social-icon.mail::before {
-      background: linear-gradient(135deg, #4f46e5, #6366f1, #3b82f6);
-    }
-    .social-icon.mail:hover {
-      border-color: #4f46e5;
-      background: linear-gradient(180deg, rgba(79, 70, 229, 0.1), #161920 45%);
-      box-shadow: 0 8px 24px rgba(79, 70, 229, 0.2);
-      color: #6366f1;
-    }
-
     .social-icon:focus-visible {
-      outline: 2px solid #4f46e5;
+      outline: 2px solid #ffffff;
       outline-offset: 3px;
     }
 
@@ -264,18 +236,8 @@
       min-width: 0;
     }
 
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: #333a4a;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    /* === Стили обводки и свечения карт при наведении === */
-
-    /* Общие правила для эффекта свечения (псевдоэлементы ::before) */
-    .card.featured::before,
-    .card.imagebot::before,
-    .card.tarot::before {
+    /* Общий эффект белого свечения для проектов */
+    .card::before {
       content: "";
       position: absolute;
       inset: -1px;
@@ -287,41 +249,18 @@
       -webkit-mask-composite: xor;
       mask-composite: exclude;
       pointer-events: none;
+      background: linear-gradient(135deg, #ffffff, #cbd5e1, #ffffff);
     }
 
-    /* Индивидуальные градиенты для каждой карты */
-    .card.featured::before {
-      background: linear-gradient(135deg, #4f46e5, #6366f1, #3b82f6);
-    }
-    .card.imagebot::before {
-      background: linear-gradient(135deg, #3b82f6, #38bdf8, #60a5fa);
-    }
-    .card.tarot::before {
-      background: linear-gradient(135deg, #8b5cf6, #a78bfa, #c4b5fd);
-    }
-
-    /* Активация свечения при наведении */
-    .card.featured:hover::before,
-    .card.imagebot:hover::before,
-    .card.tarot:hover::before {
+    .card:hover::before {
       opacity: 1;
     }
 
-    /* Стили карт при наведении (тени, цвет рамки и градиентный фон) */
-    .card.featured:hover {
-      border-color: #4f46e5;
-      background: linear-gradient(180deg, rgba(79, 70, 229, 0.1), #161920 45%);
-      box-shadow: 0 12px 48px rgba(79, 70, 229, 0.28);
-    }
-    .card.imagebot:hover {
-      border-color: #3b82f6;
-      background: linear-gradient(180deg, rgba(59, 130, 246, 0.1), #161920 45%);
-      box-shadow: 0 12px 48px rgba(59, 130, 246, 0.28);
-    }
-    .card.tarot:hover {
-      border-color: #8b5cf6;
-      background: linear-gradient(180deg, rgba(139, 92, 246, 0.1), #161920 45%);
-      box-shadow: 0 12px 48px rgba(139, 92, 246, 0.28);
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: #ffffff;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), #161920 45%);
+      box-shadow: 0 12px 48px rgba(255, 255, 255, 0.14);
     }
 
     /* === Project Tags === */
@@ -339,9 +278,9 @@
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       padding: 5px 10px;
       border-radius: 999px;
-      background: #1f2430;
-      color: #b7c0d1;
-      border: 1px solid #30384a;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #e2e8f0;
       white-space: nowrap;
     }
 
@@ -352,6 +291,7 @@
       border-radius: 50%;
       margin-right: 6px;
       flex-shrink: 0;
+      background: #ffffff !important;
     }
 
     .card-header {
@@ -378,39 +318,8 @@
       margin-right: 10px;
       font-size: 1rem;
       flex-shrink: 0;
-    }
-
-    .card.featured .card-icon {
-      background: rgba(79, 70, 229, 0.16);
-      border: 1px solid rgba(79, 70, 229, 0.4);
-    }
-
-    .card.imagebot .card-icon {
-      background: rgba(59, 130, 246, 0.16);
-      border: 1px solid rgba(59, 130, 246, 0.4);
-    }
-
-    .card.tarot .card-icon {
-      background: rgba(139, 92, 246, 0.16);
-      border: 1px solid rgba(139, 92, 246, 0.4);
-    }
-
-    .project-tag.tag-featured {
-      background: rgba(99, 102, 241, 0.24);
-      border-color: rgba(129, 140, 248, 0.55);
-      color: #e0e1fd;
-    }
-
-    .project-tag.tag-imagebot {
-      background: rgba(56, 189, 248, 0.22);
-      border-color: rgba(125, 211, 252, 0.5);
-      color: #d6f3fe;
-    }
-
-    .project-tag.tag-tarot {
-      background: rgba(168, 130, 250, 0.24);
-      border-color: rgba(196, 168, 252, 0.5);
-      color: #ede8fe;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .card-description {
@@ -428,9 +337,9 @@
       font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       font-size: 0.88rem;
       font-weight: 600;
-      color: #eaf6ff;
-      background-color: rgba(42, 171, 238, 0.14);
-      border: 1px solid rgba(42, 171, 238, 0.3);
+      color: #ffffff;
+      background-color: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       padding: 10px 18px;
       border-radius: 8px;
       transition: all 250ms ease-in-out;
@@ -443,17 +352,17 @@
       width: 16px;
       height: 16px;
       flex-shrink: 0;
-      color: #4db8f0;
+      color: #ffffff;
     }
 
     .card-action:hover {
-      background-color: rgba(42, 171, 238, 0.22);
-      border-color: rgba(42, 171, 238, 0.5);
+      background-color: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.35);
       color: #ffffff;
     }
 
     .card-action:focus-visible {
-      outline: 2px solid #2aabee;
+      outline: 2px solid #ffffff;
       outline-offset: 3px;
     }
 
@@ -495,34 +404,94 @@
       transform: rotate(90deg);
     }
 
-    /* 1. Commit Chronicle (Сине-фиолетовый / Indigo) */
-    .card.featured .arch-details summary:hover,
-    .card.featured .arch-details[open] summary {
-      color: #6366f1;
+    .arch-details summary:hover,
+    .arch-details[open] summary {
+      color: #ffffff;
     }
-    .card.featured .arch-details summary:hover::before,
-    .card.featured .arch-details[open] summary::before {
-      color: #6366f1;
-    }
-
-    /* 2. ImageBot (Голубой / Blue) */
-    .card.imagebot .arch-details summary:hover,
-    .card.imagebot .arch-details[open] summary {
-      color: #3b82f6;
-    }
-    .card.imagebot .arch-details summary:hover::before,
-    .card.imagebot .arch-details[open] summary::before {
-      color: #3b82f6;
+    .arch-details summary:hover::before,
+    .arch-details[open] summary::before {
+      color: #ffffff;
     }
 
-    /* 3. Tarot Bot (Фиолетовый / Violet) */
-    .card.tarot .arch-details summary:hover,
-    .card.tarot .arch-details[open] summary {
-      color: #a78bfa;
+    /* === Tech Stack === */
+    .tech-stack-section {
+      margin-top: 48px;
     }
-    .card.tarot .arch-details summary:hover::before,
-    .card.tarot .arch-details[open] summary::before {
-      color: #a78bfa;
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 1024px) {
+      .tech-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .tech-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tech-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .tech-card {
+      background-color: #161920;
+      border: 1px solid #242933;
+      border-left: 4px solid #242933;
+      border-radius: 12px;
+      padding: 20px 16px;
+      transition: all 250ms ease-in-out;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tech-card:hover {
+      transform: translateY(-3px);
+      border-color: #ffffff;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), #161920 60%);
+      box-shadow: 0 12px 48px rgba(255, 255, 255, 0.14);
+    }
+
+    .tech-card-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.95rem;
+      font-weight: 650;
+      color: #f0f2f5;
+      margin-bottom: 14px;
+      border-bottom: 1px solid #242933;
+      padding-bottom: 8px;
+    }
+
+    .tech-card-icon {
+      font-size: 1rem;
+    }
+
+    .tech-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .tech-item {
+      font-size: 0.82rem;
+      color: #8a94a6;
+      line-height: 1.4;
+    }
+
+    .tech-item strong {
+      color: #f0f2f5;
+      font-weight: 600;
     }
 
     /* === Engineering Profile Section === */
@@ -543,7 +512,7 @@
       inset: 0;
       border-radius: 12px;
       padding: 1px;
-      background: linear-gradient(135deg, rgba(79, 70, 229, 0.35), rgba(139, 92, 246, 0.2), rgba(59, 130, 246, 0.25));
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.15));
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
@@ -552,7 +521,7 @@
 
     .engineering-profile:hover {
       transform: translateY(-2px);
-      box-shadow: 0 0 40px rgba(79, 70, 229, 0.06);
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.05);
     }
 
     .engineering-profile h2 {
@@ -578,8 +547,8 @@
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
       font-size: 0.85rem;
       font-weight: 500;
-      color: #f0f2f5;
-      background: linear-gradient(135deg, #4f46e5, #3b82f6);
+      color: #0d0f12;
+      background: linear-gradient(135deg, #ffffff, #cbd5e1);
       padding: 10px 22px;
       border-radius: 8px;
       transition: all 250ms ease-in-out;
@@ -587,14 +556,14 @@
     }
 
     .github-btn:hover {
-      opacity: 0.88;
-      color: #f0f2f5;
+      opacity: 0.9;
+      color: #0d0f12;
       transform: translateY(-1px);
-      box-shadow: 0 4px 20px rgba(79, 70, 229, 0.25);
+      box-shadow: 0 4px 20px rgba(255, 255, 255, 0.2);
     }
 
     .github-btn:focus-visible {
-      outline: 2px solid #6366f1;
+      outline: 2px solid #ffffff;
       outline-offset: 3px;
     }
 
@@ -631,11 +600,11 @@
     }
 
     .footer-links a:hover {
-      color: #f0f2f5;
+      color: #ffffff;
     }
 
     .footer-links a:focus-visible {
-      outline: 2px solid #4f46e5;
+      outline: 2px solid #ffffff;
       outline-offset: 3px;
       border-radius: 3px;
     }
@@ -677,13 +646,13 @@
         <p class="hero-subtitle">Python Backend Developer / AI Integration Engineer</p>
 
         <div class="hero-socials">
-          <a class="social-icon tg" href="https://t.me/mageri9" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
+          <a class="social-icon" href="https://t.me/mageri9" target="_blank" rel="noopener noreferrer" aria-label="Telegram">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
           </a>
-          <a class="social-icon gh" href="https://github.com/mageri9" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <a class="social-icon" href="https://github.com/mageri9" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.2 4.2 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3 0 0 0-6.2 0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg>
           </a>
-          <a class="social-icon mail" href="mailto:koloskovse@icloud.com" aria-label="Email">
+          <a class="social-icon" href="mailto:koloskovse@icloud.com" aria-label="Email">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </a>
         </div>
@@ -700,7 +669,7 @@
         <div class="projects-grid">
 
           <!-- CARD 1: Commit Chronicle (Featured) -->
-          <article class="card featured">
+          <article class="card">
             <div class="card-header">
               <h3 class="card-title"><span class="card-icon">📊</span>Commit Chronicle</h3>
             </div>
@@ -708,8 +677,8 @@
             <p class="card-description">Telegram-бот для глубокого анализа активности GitHub-аккаунтов. По одной команде собирает коммиты, формирует сводку и генерирует ультра-сжатый JSON-файл для последующей передачи в LLM.</p>
 
             <div class="project-tags">
-              <span class="project-tag tag-featured"><span class="dot" style="background:#4f46e5"></span>Architecture</span>
-              <span class="project-tag tag-featured"><span class="dot" style="background:#22c55e"></span>Production</span>
+              <span class="project-tag"><span class="dot"></span>Architecture</span>
+              <span class="project-tag"><span class="dot"></span>Production</span>
             </div>
 
             <details class="arch-details">
@@ -750,7 +719,7 @@
           </article>
 
           <!-- CARD 2: ImageBot -->
-          <article class="card imagebot">
+          <article class="card">
             <div class="card-header">
               <h3 class="card-title"><span class="card-icon">🎨</span>ImageBot</h3>
             </div>
@@ -758,8 +727,8 @@
             <p class="card-description">Легкий бот для генерации и редактирования изображений по текстовым промтам и фотографиям с поддержкой нескольких провайдеров.</p>
 
             <div class="project-tags">
-              <span class="project-tag tag-imagebot"><span class="dot" style="background:#8b5cf6"></span>AI Images</span>
-              <span class="project-tag tag-imagebot"><span class="dot" style="background:#22c55e"></span>Production</span>
+              <span class="project-tag"><span class="dot"></span>AI Images</span>
+              <span class="project-tag"><span class="dot"></span>Production</span>
             </div>
 
             <details class="arch-details">
@@ -801,7 +770,7 @@ Image Stitcher
           </article>
 
           <!-- CARD 3: Tarot Bot -->
-          <article class="card tarot">
+          <article class="card">
             <div class="card-header">
               <h3 class="card-title"><span class="card-icon">🔮</span>Tarot Bot</h3>
             </div>
@@ -809,8 +778,8 @@ Image Stitcher
             <p class="card-description">Асинхронный бот для гадания на картах Таро с интегрированным AI-Оракулом, интерпретирующим расклады на основе контекста и настроения пользователя.</p>
 
             <div class="project-tags">
-              <span class="project-tag tag-tarot"><span class="dot" style="background:#3b82f6"></span>LLM</span>
-              <span class="project-tag tag-tarot"><span class="dot" style="background:#8b5cf6"></span>RAG</span>
+              <span class="project-tag"><span class="dot"></span>LLM</span>
+              <span class="project-tag"><span class="dot"></span>RAG</span>
             </div>
 
             <details class="arch-details">
@@ -848,6 +817,65 @@ AI Interpretation
             </a>
           </article>
 
+        </div>
+      </section>
+
+      <!-- ====== TECH STACK SECTION ====== -->
+      <section class="tech-stack-section" aria-label="Стек технологий">
+        <h2 class="section-title">Стек технологий</h2>
+
+        <div class="tech-grid">
+          <!-- Languages -->
+          <div class="tech-card">
+            <h3 class="tech-card-title"><span class="tech-card-icon">💻</span>Languages</h3>
+            <ul class="tech-list">
+              <li class="tech-item"><strong>Python</strong> (Asyncio)</li>
+              <li class="tech-item"><strong>SQL</strong> (PostgreSQL, SQLite)</li>
+              <li class="tech-item"><strong>HTML / CSS</strong></li>
+            </ul>
+          </div>
+
+          <!-- Frameworks & Libraries -->
+          <div class="tech-card">
+            <h3 class="tech-card-title"><span class="tech-card-icon">🛠️</span>Frameworks</h3>
+            <ul class="tech-list">
+              <li class="tech-item"><strong>aiogram 3</strong></li>
+              <li class="tech-item"><strong>FastAPI</strong></li>
+              <li class="tech-item"><strong>SQLAlchemy 2.0</strong></li>
+              <li class="tech-item"><strong>Alembic</strong></li>
+              <li class="tech-item"><strong>Pytest</strong></li>
+            </ul>
+          </div>
+
+          <!-- Data & Caching -->
+          <div class="tech-card">
+            <h3 class="tech-card-title"><span class="tech-card-icon">💾</span>Data & Caching</h3>
+            <ul class="tech-list">
+              <li class="tech-item"><strong>Redis</strong> (FSM, Pub/Sub, Cache)</li>
+              <li class="tech-item"><strong>PostgreSQL</strong></li>
+              <li class="tech-item"><strong>SQLite</strong> (WAL optimization)</li>
+            </ul>
+          </div>
+
+          <!-- DevOps & Tools -->
+          <div class="tech-card">
+            <h3 class="tech-card-title"><span class="tech-card-icon">⚙️</span>DevOps & Tools</h3>
+            <ul class="tech-list">
+              <li class="tech-item"><strong>Docker</strong> / <strong>Compose</strong></li>
+              <li class="tech-item"><strong>Nginx</strong></li>
+              <li class="tech-item"><strong>GitHub Actions</strong></li>
+              <li class="tech-item"><strong>Sentry</strong>, <strong>Ruff</strong>, <strong>Git</strong></li>
+            </ul>
+          </div>
+
+          <!-- Other -->
+          <div class="tech-card">
+            <h3 class="tech-card-title"><span class="tech-card-icon">🔌</span>Other</h3>
+            <ul class="tech-list">
+              <li class="tech-item"><strong>LLM APIs</strong> (OpenAI, AITunnel)</li>
+              <li class="tech-item"><strong>Media Gen</strong> (MoviePy, Pillow)</li>
+            </ul>
+          </div>
         </div>
       </section>
 

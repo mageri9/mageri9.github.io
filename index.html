@@ -329,28 +329,31 @@
     }
 
     .card-title {
-      display: flex;
-      align-items: center;
-      font-size: 1.15rem;
-      font-weight: 650;
-      color: #f0f2f5;
-      margin-bottom: 10px;
-      letter-spacing: -0.01em;
-    }
+   display: flex;
+   align-items: center;
+   font-family: 'Press Start 2P', Inter, system-ui, sans-serif;
+   font-size: 0.75rem; /* Пиксельные шрифты лучше всего читаются в небольшом размере */
+   font-weight: 400;
+   color: #f0f2f5;
+   margin-bottom: 14px;
+   line-height: 1.5;
+ }
 
-    .card-icon {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 30px;
-      height: 30px;
-      border-radius: 8px;
-      margin-right: 10px;
-      font-size: 1rem;
-      flex-shrink: 0;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
+ .card-icon {
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   width: 24px;
+   height: 24px;
+   border-radius: 4px;
+   margin-right: 12px;
+   font-family: 'Press Start 2P', monospace;
+   font-size: 0.65rem;
+   color: #ffffff;
+   flex-shrink: 0;
+   background: rgba(255, 255, 255, 0.08);
+   border: 1px solid rgba(255, 255, 255, 0.2);
+ }
 
     .card-description {
       font-size: 0.9rem;
@@ -752,7 +755,7 @@
           <!-- CARD 1: Commit Chronicle -->
           <article class="card">
             <div class="card-header">
-              <h3 class="card-title"><span class="card-icon">📊</span>Commit Chronicle</h3>
+                <h3 class="card-title"><span class="card-icon">📊</span>Commit Chronicle</h3>
             </div>
 
             <p class="card-description">Telegram-бот для глубокого анализа активности GitHub-аккаунтов. По одной команде собирает коммиты, формирует сводку и генерирует ультра-сжатый JSON-файл для последующей передачи в LLM.</p>
@@ -802,7 +805,7 @@
           <!-- CARD 2: ImageBot -->
           <article class="card">
             <div class="card-header">
-              <h3 class="card-title"><span class="card-icon">🎨</span>ImageBot</h3>
+                <h3 class="card-title"><span class="card-icon">🎨</span>ImageBot</h3>
             </div>
 
             <p class="card-description">Легкий бот для генерации и редактирования изображений по текстовым промтам и фотографиям с поддержкой нескольких провайдеров.</p>

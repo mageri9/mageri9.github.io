@@ -763,40 +763,33 @@
                 <h3 class="card-title">Commit Chronicle</h3>
             </div>
 
-            <p class="card-description">Telegram-бот для глубокого анализа активности GitHub-аккаунтов. По одной команде собирает коммиты, формирует сводку и генерирует ультра-сжатый JSON-файл для последующей передачи в LLM.</p>
+            <p class="card-description">Telegram-бот для глубокого анализа активности на GitHub. Собирает коммиты через кастомный GraphQL-движок, упаковывая данные в ультра-сжатый JSON для передачи в LLM.</p>
 
             <div class="project-tags">
-              <span class="project-tag"><span class="dot"></span>Architecture</span>
+              <span class="project-tag"><span class="dot"></span>GraphQL Engine</span>
               <span class="project-tag"><span class="dot"></span>Production</span>
             </div>
 
             <details class="arch-details">
               <summary>⚙ Архитектура</summary>
               <div class="arch-content">
-                <div class="arch-stack">Python 3.11 • python-telegram-bot • arq • Redis • SQLite + SQLAlchemy Core</div>
+                <div class="arch-stack">Python 3.11 • python-telegram-bot • arq • Redis • SQLite • GraphQL (HTTP/2)</div>
                 <div class="arch-schema">
-                  <pre><code>Telegram (/analyze)
-      │
-      ▼
- Redis Queue
-      │
-      ▼
-    Worker
-      │
-      ▼
- JSON Optimizer
-      │
-      ▼
- Redis Pub/Sub
-      │
-      ▼
- Telegram Chat</code></pre>
+                  <pre><code>Telegram ──► arq Worker ──► Redis/SQLite
+                │
+                ▼
+  GitHub API (GraphQL/REST)
+  ├── TokenPool (RateLimiter)
+  └── HTTP/2 Batch (20 repos)
+                │
+                ▼
+  Compact JSON ──► Pub/Sub ──► Chat</code></pre>
                 </div>
                 <ul class="arch-features">
-                  <li>Дедупликация кэша по SHA256 (отдача данных без повторных запросов к API).</li>
-                  <li>Сжатие результирующего JSON на 55-60% (экономия токенов контекста LLM).</li>
-                  <li>Round-robin ротация токенов доступа к GitHub с обработкой лимитов (Rate Limit).</li>
-                  <li>Recovery-механизм для восстановления зависших задач при перезапуске воркера.</li>
+                  <li><strong>GraphQL Engine:</strong> Кастомный клиент на httpx (HTTP/2) с курсорной пагинацией.</li>
+                  <li><strong>Aliases Batching:</strong> Сбор истории коммитов 20 репозиториев за один HTTP-запрос.</li>
+                  <li><strong>TokenPool:</strong> Раздельный лимитинг REST/GraphQL и контроль стоимости до запроса.</li>
+                  <li><strong>Compact Result:</strong> Сжатие JSON на 55–60% для LLM через ручную сериализацию.</li>
                 </ul>
               </div>
             </details>
@@ -919,6 +912,7 @@ AI Interpretation
             <h3 class="tech-card-title"><span class="tech-card-icon">💻</span>Languages</h3>
             <ul class="tech-list">
               <li class="tech-item"><strong>Python</strong> (Asyncio)</li>
+              <li class="tech-item"><strong>GraphQL</strong> (Custom Engine)</li>
               <li class="tech-item"><strong>SQL</strong> (PostgreSQL, SQLite)</li>
               <li class="tech-item"><strong>HTML / CSS</strong></li>
             </ul>
@@ -929,10 +923,10 @@ AI Interpretation
             <h3 class="tech-card-title"><span class="tech-card-icon">🛠️</span>Frameworks</h3>
             <ul class="tech-list">
               <li class="tech-item"><strong>aiogram 3</strong></li>
+              <li class="tech-item"><strong>python-telegram-bot</strong></li>
               <li class="tech-item"><strong>FastAPI</strong></li>
-              <li class="tech-item"><strong>SQLAlchemy 2.0</strong></li>
-              <li class="tech-item"><strong>Alembic</strong></li>
-              <li class="tech-item"><strong>Pytest</strong></li>
+              <li class="tech-item"><strong>SQLAlchemy 2.0 & Core</strong></li>
+              <li class="tech-item"><strong>Alembic</strong>, <strong>Pytest</strong></li>
             </ul>
           </div>
 
@@ -940,7 +934,7 @@ AI Interpretation
           <div class="tech-card">
             <h3 class="tech-card-title"><span class="tech-card-icon">💾</span>Data & Caching</h3>
             <ul class="tech-list">
-              <li class="tech-item"><strong>Redis</strong> (FSM, Pub/Sub, Cache)</li>
+              <li class="tech-item"><strong>Redis</strong> (Pub/Sub, FSM, Cache)</li>
               <li class="tech-item"><strong>PostgreSQL</strong></li>
               <li class="tech-item"><strong>SQLite</strong> (WAL optimization)</li>
             </ul>
@@ -961,7 +955,8 @@ AI Interpretation
           <div class="tech-card">
             <h3 class="tech-card-title"><span class="tech-card-icon">🔌</span>Other</h3>
             <ul class="tech-list">
-              <li class="tech-item"><strong>LLM APIs</strong> (OpenAI, AITunnel)</li>
+              <li class="tech-item"><strong>httpx (HTTP/2)</strong></li>
+              <li class="tech-item"><strong>LLM APIs</strong> / <strong>tiktoken</strong></li>
               <li class="tech-item"><strong>Media Gen</strong> (MoviePy, Pillow)</li>
             </ul>
           </div>

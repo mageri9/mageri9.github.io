@@ -1001,13 +1001,20 @@ AI Interpretation
               <div class="arch-content">
                 <div class="arch-stack">Python 3.11 • FastAPI • aiogram 3 • Redis (Pub/Sub) • Docker API (Proxy) • Gemma 4 (AITunnel)</div>
                 <div class="arch-schema">
-                  <pre><code>  GitHub Actions ──► FastAPI Webhook
-                          │
-                          ▼ (Redis Pub/Sub)
-  Collector ──► EventBus ──► Incident ──► Gemma 4
-      │ (5s)                 │
-      ▼                      ▼
-  Docker Containers ──► Telegram Alert</code></pre>
+                  <pre><code>GitHub Actions
+      │
+      ▼
+FastAPI Webhook
+      │ (Redis Pub/Sub)
+      ▼
+State Collector (5s)
+      │
+      ▼
+EventBus / Incident
+      ├──► Gemma 4 (AI)
+      │
+      ▼
+Telegram Alert</code></pre>
                 </div>
                 <ul class="arch-features">
                   <li><strong>DooD (Docker-out-of-Docker):</strong> Изолированное и безопасное взаимодействие через docker-socket-proxy с жесткими whitelist-правилами.</li>

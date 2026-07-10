@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Портфолио mageri9 — разработка высокопроизводительных Telegram-ботов, LLM-систем и автоматизаций на Python.">
+  <meta name="description" content="Портфолио mageri9 — разработка Telegram-ботов, LLM-систем и автоматизации инфраструктуры на Python.">
   <meta name="theme-color" content="#0d0f12">
   <meta property="og:title" content="mageri9 — Backend / Python Developer">
-  <meta property="og:description" content="Портфолио mageri9 — разработка высокопроизводительных Telegram-ботов, LLM-систем и автоматизаций на Python.">
+  <meta property="og:description" content="Портфолио mageri9 — разработка Telegram-ботов, LLM-систем и автоматизации инфраструктуры на Python.">
   <meta property="og:type" content="website">
   <link class="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d0f12'/%3E%3Cpath d='M16 6l1.8 3.6L22 10.4l-3 2.9.7 4.1L16 15.4 12.3 17.4l.7-4.1-3-2.9 4.2-.8z' fill='%23ffffff'/%3E%3Cpath d='M9 20h14v2H9zm2 4h10v2H11z' fill='%238a94a6'/%3E%3C/svg%3E">
   <title>mageri9 — Backend / Python Developer</title>
@@ -847,7 +847,7 @@
                 <h3 class="card-title">Commit Chronicle</h3>
             </div>
 
-            <p class="card-description">Telegram-бот для глубокого анализа активности на GitHub. Собирает коммиты через кастомный GraphQL-движок, упаковывая данные в ультра-сжатый JSON для передачи в LLM.</p>
+            <p class="card-description">Асинхронный анализатор активности на GitHub. Построен на GraphQL/REST движке с пакетной обработкой запросов (batching), дедупликацией на основе отпечатков (fingerprint) репозиториев, Redis-кэшем и фоновыми задачами на arq.</p>
 
             <div class="project-tags">
               <span class="project-tag"><span class="dot"></span>GraphQL Engine</span>
@@ -890,7 +890,7 @@
                 <h3 class="card-title">ImageBot</h3>
             </div>
 
-            <p class="card-description">Легкий бот для генерации и редактирования изображений по текстовым промтам и фотографиям с поддержкой нескольких провайдеров.</p>
+            <p class="card-description">Бот для генерации изображений с балансировкой и отказоустойчивым роутингом запросов между AI-провайдерами, автоматической склейкой кадров, гибкой системой квот и Pub/Sub телеметрией расхода токенов.</p>
 
             <div class="project-tags">
               <span class="project-tag"><span class="dot"></span>AI Images</span>
@@ -941,7 +941,7 @@ Image Stitcher
               <h3 class="card-title">Tarot Bot</h3>
             </div>
 
-            <p class="card-description">Асинхронный бот для гадания на картах Таро с интегрированным AI-Оракулом, интерпретирующим расклады на основе контекста и настроения пользователя.</p>
+            <p class="card-description">Интерактивный Telegram-бот для раскладов Таро с RAG-архитектурой и ИИ-Оракулом. Отказоустойчивый контур работы с LLM (Circuit Breaker + Fallback), кэширование контекстных ответов в Redis и Pub/Sub аналитика.</p>
 
             <div class="project-tags">
               <span class="project-tag"><span class="dot"></span>LLM</span>
@@ -989,7 +989,7 @@ AI Interpretation
               <h3 class="card-title">Nexus</h3>
             </div>
 
-            <p class="card-description">Событийно-ориентированное ядро управления (Control Plane), мониторинга и автоматической ИИ-диагностики (AIOps) для фермы Telegram-ботов и микросервисов.</p>
+            <p class="card-description">Событийно-ориентированная панель управления (Control Plane) на aiogram 3 для мониторинга серверов и Docker-контейнеров. Безопасный прокси сокета, автоматический ИИ-диагноз логов на базе Gemma и сквозной сбор метрик.</p>
 
             <div class="project-tags">
               <span class="project-tag"><span class="dot"></span>AIOps</span>

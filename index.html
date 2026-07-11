@@ -293,24 +293,24 @@
       box-shadow: 0 12px 48px rgba(255, 255, 255, 0.14);
     }
 
-    /* === Special Card (Nexus) === */
-    .card.nexus-special {
+    /* === Special Card (Chronicle) === */
+    .card.chronicle-special {
       border-color: rgba(255, 255, 255, 0.45);
       /* Яркая и контрастная фоновая подсветка по умолчанию */
       box-shadow: 0 0 28px rgba(255, 255, 255, 0.12), inset 0 0 12px rgba(255, 255, 255, 0.04);
     }
 
-    .card.nexus-special::before {
+    .card.chronicle-special::before {
       opacity: 0.65; /* Повышенная постоянная яркость границ */
     }
 
-    .card.nexus-special:hover {
+    .card.chronicle-special:hover {
       border-color: #ffffff;
       /* Интенсивное глубокое свечение при наведении */
       box-shadow: 0 0 54px rgba(255, 255, 255, 0.28), 0 8px 30px rgba(255, 255, 255, 0.14);
     }
 
-    .card.nexus-special:hover::before {
+    .card.chronicle-special:hover::before {
       opacity: 1;
     }
 
@@ -773,7 +773,7 @@
     <!-- ====== MAIN CONTENT ====== -->
     <main>
 
-      <!-- ====== TECH STACK SECTION (MOVED UP) ====== -->
+      <!-- ====== TECH STACK SECTION ====== -->
       <section class="tech-stack-section" aria-label="Стек технологий">
         <h2 class="section-title">Стек технологий</h2>
 
@@ -835,45 +835,44 @@
         </div>
       </section>
 
-      <!-- ====== PROJECTS SECTION (MOVED DOWN) ====== -->
+      <!-- ====== PROJECTS SECTION ====== -->
       <section aria-label="Проекты">
         <h2 class="section-title">Проекты</h2>
 
         <div class="projects-grid">
 
           <!-- CARD 1: Commit Chronicle -->
-          <article class="card">
+          <article class="card chronicle-special">
             <div class="card-header">
                 <h3 class="card-title">Commit Chronicle</h3>
             </div>
 
-            <p class="card-description">Асинхронный анализатор активности на GitHub. Построен на GraphQL/REST движке с пакетной обработкой запросов (batching), дедупликацией на основе отпечатков (fingerprint) репозиториев, Redis-кэшем и фоновыми задачами на arq.</p>
+            <p class="card-description">Telegram-бот для аналитики GitHub. Собирает наглядную статистику по коммитам и технологиям, сохраняет историю в локальную базу данных и автоматически обновляет отчеты прямо во время пушей благодаря вебхукам.</p>
 
             <div class="project-tags">
               <span class="project-tag"><span class="dot"></span>GraphQL Engine</span>
-              <span class="project-tag"><span class="dot"></span>Production</span>
+              <span class="project-tag"><span class="dot"></span>Incremental Sync</span>
             </div>
 
             <details class="arch-details">
               <summary>⚙ Архитектура</summary>
               <div class="arch-content">
-                <div class="arch-stack">Python 3.11 • python-telegram-bot • arq • Redis • SQLite • GraphQL (HTTP/2)</div>
+                <div class="arch-stack">Python 3.11 • python-telegram-bot • SQLite (WAL) • GraphQL • aiohttp • Redis • arq</div>
                 <div class="arch-schema">
-                  <pre><code>Telegram ──► arq Worker ──► Redis/SQLite
-                │
-                ▼
-  GitHub API (GraphQL/REST)
-  ├── TokenPool (RateLimiter)
-  └── HTTP/2 Batch (20 repos)
-                │
-                ▼
-  Compact JSON ──► Pub/Sub ──► Chat</code></pre>
+                  <pre><code>[Webhook] ──► [aiohttp]
+                 │
+                 ▼
+[Bot UI] ◄── [SQLite WAL]
+    ▲            ▲
+    │ (FastPath) │ (Sync)
+    └─────── [arq Worker]</code></pre>
                 </div>
                 <ul class="arch-features">
-                  <li><strong>GraphQL Engine:</strong> Кастомный клиент на httpx (HTTP/2) с курсорной пагинацией.</li>
-                  <li><strong>Aliases Batching:</strong> Сбор истории коммитов 20 репозиториев за один HTTP-запрос.</li>
-                  <li><strong>TokenPool:</strong> Раздельный лимитинг REST/GraphQL и контроль стоимости до запроса.</li>
-                  <li><strong>Compact Result:</strong> Сжатие JSON на 55–60% для LLM через ручную сериализацию.</li>
+                  <li><strong>GraphQL-движок:</strong> Быстро скачивает данные о коммитах даже для крупных профилей, бережно расходуя лимиты запросов GitHub.</li>
+                  <li><strong>Быстрые отчеты:</strong> Выдает готовый отчет моментально из собственной базы, не заставляя пользователя ждать загрузки с серверов GitHub.</li>
+                  <li><strong>Автообновление (Вебхуки):</strong> Интеграция с GitHub Webhooks позволяет боту узнавать о ваших новых коммитах сразу после <code>git push</code>.</li>
+                  <li><strong>Умная проверка:</strong> Перед обновлением бот сверяет легкий «отпечаток» репозитория, защищая систему от лишней холостой работы.</li>
+                  <li><strong>Сжатие данных:</strong> Результаты сжимаются на 60–70%, подготавливая чистую и структурированную выжимку для будущего ИИ-анализа.</li>
                 </ul>
               </div>
             </details>
@@ -894,7 +893,6 @@
 
             <div class="project-tags">
               <span class="project-tag"><span class="dot"></span>AI Images</span>
-              <span class="project-tag"><span class="dot"></span>Production</span>
             </div>
 
             <details class="arch-details">
@@ -984,7 +982,7 @@ AI Interpretation
           </article>
 
           <!-- CARD 4: Nexus -->
-          <article class="card nexus-special">
+          <article class="card">
             <div class="card-header">
               <h3 class="card-title">Nexus</h3>
             </div>

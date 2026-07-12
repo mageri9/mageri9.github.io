@@ -237,7 +237,8 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
-      align-items: start;
+      /* stretch обеспечивает одинаковую высоту карточек в ряду */
+      align-items: stretch;
     }
 
     @media (max-width: 768px) {
@@ -287,25 +288,68 @@
       box-shadow: 0 12px 48px rgba(255, 255, 255, 0.14);
     }
 
-    /* === Special Card (Chronicle) === */
-    .card.chronicle-special {
-      border-color: rgba(255, 255, 255, 0.45);
-      /* Яркая и контрастная фоновая подсветка по умолчанию */
-      box-shadow: 0 0 28px rgba(255, 255, 255, 0.12), inset 0 0 12px rgba(255, 255, 255, 0.04);
+    /* === Special Card (Nexus v2.0) === */
+    /* Мощное дискретное сияние с пиксельными импульсами */
+    .card.nexus-special {
+      border-color: rgba(255, 255, 255, 0.55);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), #161920 60%);
+      box-shadow:
+        0 0 0 2px rgba(255, 255, 255, 0.05),
+        0 0 30px rgba(255, 255, 255, 0.12),
+        inset 0 0 12px rgba(255, 255, 255, 0.03);
+      animation: pixel-sparkle 5s infinite steps(8);
     }
 
-    .card.chronicle-special::before {
-      opacity: 0.65; /* Повышенная постоянная яркость границ */
+    .card.nexus-special::before {
+      opacity: 0.7;
     }
 
-    .card.chronicle-special:hover {
+    .card.nexus-special:hover {
       border-color: #ffffff;
-      /* Интенсивное глубокое свечение при наведении */
-      box-shadow: 0 0 54px rgba(255, 255, 255, 0.28), 0 8px 30px rgba(255, 255, 255, 0.14);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), #161920 40%);
+      box-shadow:
+        0 0 0 3px rgba(255, 255, 255, 0.18),
+        0 0 54px rgba(255, 255, 255, 0.35),
+        0 8px 30px rgba(255, 255, 255, 0.15),
+        inset 0 0 20px rgba(255, 255, 255, 0.08);
+      animation: pixel-sparkle-hover 1.8s infinite steps(4);
     }
 
-    .card.chronicle-special:hover::before {
+    .card.nexus-special:hover::before {
       opacity: 1;
+    }
+
+    /* Покадровое изменение контуров создает ощущение "живых" пиксельных искр */
+    @keyframes pixel-sparkle {
+      0%, 100% {
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.04),
+          0 0 24px rgba(255, 255, 255, 0.08),
+          inset 0 0 8px rgba(255, 255, 255, 0.02);
+      }
+      50% {
+        box-shadow:
+          0 0 0 3px rgba(255, 255, 255, 0.12),
+          0 0 36px rgba(255, 255, 255, 0.22),
+          inset 0 0 16px rgba(255, 255, 255, 0.06);
+      }
+    }
+
+    @keyframes pixel-sparkle-hover {
+      0%, 100% {
+        box-shadow:
+          0 0 0 2px rgba(255, 255, 255, 0.12),
+          0 0 45px rgba(255, 255, 255, 0.28),
+          0 6px 20px rgba(255, 255, 255, 0.12),
+          inset 0 0 15px rgba(255, 255, 255, 0.05);
+      }
+      50% {
+        box-shadow:
+          0 0 0 4px rgba(255, 255, 255, 0.25),
+          0 0 65px rgba(255, 255, 255, 0.5),
+          0 10px 35px rgba(255, 255, 255, 0.25),
+          inset 0 0 25px rgba(255, 255, 255, 0.12);
+      }
     }
 
     /* === Project Tags === */
@@ -787,10 +831,10 @@
           <div class="tech-card">
             <h3 class="tech-card-title"><span class="tech-card-icon">🛠️</span>Frameworks</h3>
             <ul class="tech-list">
-              <li class="tech-item"><strong>aiogram 3</strong></li>
-              <li class="tech-item"><strong>python-telegram-bot</strong></li>
+              <li class="tech-item"><strong>aiogram 3</strong> / <strong>PTB</strong></li>
               <li class="tech-item"><strong>FastAPI</strong> / <strong>Uvicorn</strong></li>
-              <li class="tech-item"><strong>SQLAlchemy 2.0 & Core</strong></li>
+              <li class="tech-item"><strong>CatBoost</strong> / <strong>scikit-learn</strong></li>
+              <li class="tech-item"><strong>Pandas</strong> / <strong>SQLAlchemy 2.0</strong></li>
               <li class="tech-item"><strong>Alembic</strong>, <strong>Pytest</strong></li>
             </ul>
           </div>
@@ -801,7 +845,7 @@
             <ul class="tech-list">
               <li class="tech-item"><strong>Redis</strong> (Pub/Sub Event Bus, FSM)</li>
               <li class="tech-item"><strong>PostgreSQL</strong></li>
-              <li class="tech-item"><strong>SQLite</strong> (aiosqlite)</li>
+              <li class="tech-item"><strong>SQLite WAL</strong> (Analytical Memory)</li>
             </ul>
           </div>
 
@@ -820,6 +864,7 @@
           <div class="tech-card">
             <h3 class="tech-card-title"><span class="tech-card-icon">🔌</span>Other</h3>
             <ul class="tech-list">
+              <li class="tech-item"><strong>Z-score Anomaly Detection</strong></li>
               <li class="tech-item"><strong>LLM Integrations</strong> (Gemma, OpenAI)</li>
               <li class="tech-item"><strong>Event-Driven Pattern</strong></li>
               <li class="tech-item"><strong>httpx (HTTP/2)</strong>, <strong>tiktoken</strong></li>
@@ -836,12 +881,12 @@
         <div class="projects-grid">
 
           <!-- CARD 1: Commit Chronicle -->
-          <article class="card chronicle-special">
+          <article class="card">
             <div class="card-header">
                 <h3 class="card-title">Commit Chronicle</h3>
             </div>
 
-            <p class="card-description">Telegram-бот для аналитики GitHub. Собирает наглядную статистику по коммитам и технологиям, сохраняет историю в локальную базу данных, автоматически обновляет отчеты при пушах и полностью интегрирован с SRE-платформой Nexus для мониторинга стабильности.</p>
+            <p class="card-description">Telegram-бот, который превращает историю вашей работы на GitHub в красивые, наглядные отчеты. Он мгновенно анализирует, сколько кода вы написали, какие технологии чаще всего используете, и автоматически обновляет статистику прямо в чате, как только вы загружаете новые изменения на сервер.</p>
 
             <div class="project-tags">
               <span class="project-tag"><span class="dot"></span>GraphQL Engine</span>
@@ -883,7 +928,7 @@
                 <h3 class="card-title">ImageBot</h3>
             </div>
 
-            <p class="card-description">Бот для генерации изображений с балансировкой и отказоустойчивым роутингом запросов между AI-провайдерами, автоматической склейкой кадров, гибкой системой квот и Pub/Sub телеметрией расхода токенов.</p>
+            <p class="card-description">Умный бот для создания картинок с помощью искусственного интеллекта. Он автоматически выбирает самые быстрые нейросети, умеет незаметно склеивать несколько генераций в одну большую панораму и следит за дневными лимитами, чтобы все пользователи получали свои изображения без задержек.</p>
 
             <div class="project-tags">
               <span class="project-tag"><span class="dot"></span>AI Images</span>
@@ -933,7 +978,7 @@ Image Stitcher
               <h3 class="card-title">Tarot Bot</h3>
             </div>
 
-            <p class="card-description">Интерактивный Telegram-бот для раскладов Таро с RAG-архитектурой и ИИ-Оракулом. Отказоустойчивый контур работы с LLM (Circuit Breaker + Fallback), кэширование контекстных ответов в Redis и Pub/Sub аналитика.</p>
+            <p class="card-description">Ваш личный карманный предсказатель. Бот делает расклады карт Таро и дает умные, развернутые толкования с помощью нейросетей. Он помнит ваши прошлые расклады, подстраивается под контекст беседы и надежно работает, даже если внешние ИИ-сервисы временно перегружены.</p>
 
             <div class="project-tags">
               <span class="project-tag"><span class="dot"></span>LLM</span>
@@ -976,38 +1021,41 @@ AI Interpretation
           </article>
 
           <!-- CARD 4: Nexus -->
-          <article class="card">
+          <article class="card nexus-special">
             <div class="card-header">
               <h3 class="card-title">Nexus v2.0</h3>
             </div>
 
-            <p class="card-description">Событийно-ориентированная платформа наблюдаемости (Observability) и AIOps для мониторинга микросервисов и ботов. Собственные мультифреймворковые SDK, непрерывный сбор логов в Redis, временные ряды здоровья и ИИ-диагностика.</p>
+            <p class="card-description">Центр управления и автопилот для всех моих проектов. Это умная система, которая круглосуточно следит за работой серверов и ботов. Nexus сам выявляет странности в нагрузке (например, если программа зависла), предупреждает меня в Telegram и с помощью встроенного ИИ может заранее предсказать сбой или быстро подсказать решение проблемы.</p>
 
             <div class="project-tags">
-              <span class="project-tag"><span class="dot"></span>AIOps</span>
+              <span class="project-tag"><span class="dot"></span>AIOps (CatBoost)</span>
               <span class="project-tag"><span class="dot"></span>Observability</span>
+              <span class="project-tag"><span class="dot"></span>SRE Memory</span>
               <span class="project-tag"><span class="dot"></span>Custom SDK</span>
             </div>
 
             <details class="arch-details">
               <summary>⚙ Архитектура</summary>
               <div class="arch-content">
-                <div class="arch-stack">Python 3.11 • FastAPI • aiogram 3 • Redis (Pub/Sub & Time-Series) • nexus_sdk • Gemma 4 (AITunnel)</div>
+                <div class="arch-stack">Python 3.11 • FastAPI • aiogram 3 • SQLite (Analytical Memory) • Redis (Pub/Sub & Time-Series) • CatBoost • scikit-learn • Pandas • nexus_sdk • Gemma 4 (AITunnel)</div>
                 <div class="arch-schema">
-                  <pre><code>[Боты / SDK] ──── (Events / Heartbeats) ───► [FastAPI Webhook]
-                                                           │
-                                                           ▼
-[UI Panel] ◄── [Redis Time-Series & History] ◄── [State Collector]
-    ▲                                                      │
-    │ (Manual AI Diagnose)                                 ▼
-    └────────────────────────────────────────────── [Gemma 4 (AI)]</code></pre>
+                  <pre><code>[Боты / SDK] ─── (Events / Heartbeat) ───► [FastAPI Webhook]
+                                                        │
+                                                        ▼
+[Telegram Alerts] ◄─── [State Collector] ◄─── [Redis Pub/Sub]
+       ▲                      │ (Check)             │
+       │                      ├─► [SQLite Memory] ◄─┘
+       │ (Risk alert)         │      ▲
+[Gemma 4 AI] ◄─── [Baseline] ◄┴── [CatBoost] ◄─── [Cron Retrain]</code></pre>
                 </div>
                 <ul class="arch-features">
                   <li><strong>Мультифреймворковый SDK:</strong> Собственный легковесный <code>nexus_sdk</code> с бесшовными перехватчиками исключений и пульсом (Heartbeat) для <code>aiogram</code> и <code>python-telegram-bot</code>.</li>
+                  <li><strong>Долговременная SRE-память:</strong> Собственная неблокирующая схема логов (<code>event_log</code>) и снимков метрик (<code>metric_snapshots</code>) на базе SQLite для ретроспективной аналитики.</li>
+                  <li><strong>Динамический AIOps-анализ:</strong> Выявление статистических аномалий (Z-score) и предиктивное прогнозирование рисков инцидентов (CatBoost Classifier) с обучением по ночам через cron.</li>
+                  <li><strong>Baseline-фильтр логов:</strong> Дискрепанс-гейт, сопоставляющий ИИ-риск с традиционными правилами. Алерты отправляются, только если ИИ видит скрытые аппаратные или логические угрозы.</li>
                   <li><strong>Ring Buffer логов в Redis:</strong> Построчный захват логов контейнеров <code>docker logs -f</code> напрямую в оперативный кэш Redis с авто-усечением вместо тяжелых запросов к Docker API.</li>
-                  <li><strong>Traceback Fingerprinting:</strong> Выделение первого non-framework фрейма из трейсбэков ошибок, дедупликация и ведение реестра ошибок (Error Registry) в Redis.</li>
-                  <li><strong>Auto-Recovery:</strong> Автоматическое закрытие инцидентов приложений при отсутствии новых повторений ошибок по таймауту затухания.</li>
-                  <li><strong>Временные ряды здоровья:</strong> Сбор показателей здоровья в Sorted Set в Redis и автоматический расчет трендов стабильности (<code>📈</code>, <code>📉</code>, <code>➡️</code>) на дашборде.</li>
+                  <li><strong>Traceback Fingerprinting & Auto-Recovery:</strong> Выделение первого non-framework фрейма, дедупликация ошибок в Redis и автозакрытие инцидентов приложений при отсутствии новых сбоев.</li>
                   <li><strong>DooD (Docker-out-of-Docker):</strong> Полностью безопасное SRE-взаимодействие через сокет-прокси с жестким whitelist-контролем запросов.</li>
                 </ul>
               </div>

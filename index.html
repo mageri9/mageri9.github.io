@@ -235,18 +235,12 @@
     /* === Projects Grid === */
     .projects-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 20px;
       align-items: start;
     }
 
-    @media (max-width: 1024px) {
-      .projects-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    @media (max-width: 640px) {
+    @media (max-width: 768px) {
       .projects-grid {
         grid-template-columns: 1fr;
       }
@@ -263,7 +257,7 @@
       padding: 28px 24px 24px;
       transition: all 250ms ease-in-out;
       position: relative;
-      min-height: 420px;
+      min-height: 440px;
       min-width: 0;
     }
 
@@ -847,32 +841,32 @@
                 <h3 class="card-title">Commit Chronicle</h3>
             </div>
 
-            <p class="card-description">Telegram-бот для аналитики GitHub. Собирает наглядную статистику по коммитам и технологиям, сохраняет историю в локальную базу данных и автоматически обновляет отчеты прямо во время пушей благодаря вебхукам.</p>
+            <p class="card-description">Telegram-бот для аналитики GitHub. Собирает наглядную статистику по коммитам и технологиям, сохраняет историю в локальную базу данных, автоматически обновляет отчеты при пушах и полностью интегрирован с SRE-платформой Nexus для мониторинга стабильности.</p>
 
             <div class="project-tags">
               <span class="project-tag"><span class="dot"></span>GraphQL Engine</span>
               <span class="project-tag"><span class="dot"></span>Incremental Sync</span>
+              <span class="project-tag"><span class="dot"></span>Nexus Observability</span>
             </div>
 
             <details class="arch-details">
               <summary>⚙ Архитектура</summary>
               <div class="arch-content">
-                <div class="arch-stack">Python 3.11 • python-telegram-bot • SQLite (WAL) • GraphQL • aiohttp • Redis • arq</div>
+                <div class="arch-stack">Python 3.11 • python-telegram-bot • SQLite (WAL) • GraphQL • aiohttp • Redis • arq • nexus_sdk</div>
                 <div class="arch-schema">
-                  <pre><code>[Webhook] ──► [aiohttp]
-                 │
-                 ▼
-[Bot UI] ◄── [SQLite WAL]
-    ▲            ▲
-    │ (FastPath) │ (Sync)
-    └─────── [arq Worker]</code></pre>
+                  <pre><code>[Webhook] ──► [aiohttp]         [Nexus Webhook]
+           │                                ▲
+           ▼                                │ (nexus_sdk)
+[Bot UI] ◄── [SQLite WAL]                   │
+    ▲            ▲                          │
+    │ (FastPath) │ (Sync)                   │
+    └─────── [arq Worker] ─── (Heartbeat) ──┘</code></pre>
                 </div>
                 <ul class="arch-features">
                   <li><strong>GraphQL-движок:</strong> Быстро скачивает данные о коммитах даже для крупных профилей, бережно расходуя лимиты запросов GitHub.</li>
                   <li><strong>Быстрые отчеты:</strong> Выдает готовый отчет моментально из собственной базы, не заставляя пользователя ждать загрузки с серверов GitHub.</li>
                   <li><strong>Автообновление (Вебхуки):</strong> Интеграция с GitHub Webhooks позволяет боту узнавать о ваших новых коммитах сразу после <code>git push</code>.</li>
-                  <li><strong>Умная проверка:</strong> Перед обновлением бот сверяет легкий «отпечаток» репозитория, защищая систему от лишней холостой работы.</li>
-                  <li><strong>Сжатие данных:</strong> Результаты сжимаются на 60–70%, подготавливая чистую и структурированную выжимку для будущего ИИ-анализа.</li>
+                  <li><strong>Наблюдаемость (SRE):</strong> Интеграция с <code>nexus_sdk</code> обеспечивает непрерывную отправку Heartbeat-сигналов и автоматический перехват необработанных исключений в PTB с отправкой алертов в управляющий центр.</li>
                 </ul>
               </div>
             </details>
@@ -984,42 +978,37 @@ AI Interpretation
           <!-- CARD 4: Nexus -->
           <article class="card">
             <div class="card-header">
-              <h3 class="card-title">Nexus</h3>
+              <h3 class="card-title">Nexus v2.0</h3>
             </div>
 
-            <p class="card-description">Событийно-ориентированная панель управления (Control Plane) на aiogram 3 для мониторинга серверов и Docker-контейнеров. Безопасный прокси сокета, автоматический ИИ-диагноз логов на базе Gemma и сквозной сбор метрик.</p>
+            <p class="card-description">Событийно-ориентированная платформа наблюдаемости (Observability) и AIOps для мониторинга микросервисов и ботов. Собственные мультифреймворковые SDK, непрерывный сбор логов в Redis, временные ряды здоровья и ИИ-диагностика.</p>
 
             <div class="project-tags">
               <span class="project-tag"><span class="dot"></span>AIOps</span>
-              <span class="project-tag"><span class="dot"></span>Control Plane</span>
+              <span class="project-tag"><span class="dot"></span>Observability</span>
+              <span class="project-tag"><span class="dot"></span>Custom SDK</span>
             </div>
 
             <details class="arch-details">
               <summary>⚙ Архитектура</summary>
               <div class="arch-content">
-                <div class="arch-stack">Python 3.11 • FastAPI • aiogram 3 • Redis (Pub/Sub) • Docker API (Proxy) • Gemma 4 (AITunnel)</div>
+                <div class="arch-stack">Python 3.11 • FastAPI • aiogram 3 • Redis (Pub/Sub & Time-Series) • nexus_sdk • Gemma 4 (AITunnel)</div>
                 <div class="arch-schema">
-                  <pre><code>GitHub Actions
-      │
-      ▼
-FastAPI Webhook
-      │ (Redis Pub/Sub)
-      ▼
-State Collector (5s)
-      │
-      ▼
-EventBus / Incident
-      ├──► Gemma 4 (AI)
-      │
-      ▼
-Telegram Alert</code></pre>
+                  <pre><code>[Боты / SDK] ──── (Events / Heartbeats) ───► [FastAPI Webhook]
+                                                           │
+                                                           ▼
+[UI Panel] ◄── [Redis Time-Series & History] ◄── [State Collector]
+    ▲                                                      │
+    │ (Manual AI Diagnose)                                 ▼
+    └────────────────────────────────────────────── [Gemma 4 (AI)]</code></pre>
                 </div>
                 <ul class="arch-features">
-                  <li><strong>DooD (Docker-out-of-Docker):</strong> Изолированное и безопасное взаимодействие через docker-socket-proxy с жесткими whitelist-правилами.</li>
-                  <li><strong>Auto-AI Diagnostics:</strong> Мгновенный фоновый разбор логов аварий моделью Gemma 4 при возникновении сбоев.</li>
-                  <li><strong>State Change Detection:</strong> Локальный StateCollector опрашивает контейнеры раз в 5 секунд, генерируя точечные события изменений для защиты от спама.</li>
-                  <li><strong>Decoupled Webhook Receiver:</strong> Независимый сервис на FastAPI, принимающий хуки от GitHub Actions с HMAC-SHA256 подписью.</li>
-                  <li><strong>Incident Management:</strong> Атомарная блокировка открытия инцидентов (Redis SET NX) с защитой от дублей.</li>
+                  <li><strong>Мультифреймворковый SDK:</strong> Собственный легковесный <code>nexus_sdk</code> с бесшовными перехватчиками исключений и пульсом (Heartbeat) для <code>aiogram</code> и <code>python-telegram-bot</code>.</li>
+                  <li><strong>Ring Buffer логов в Redis:</strong> Построчный захват логов контейнеров <code>docker logs -f</code> напрямую в оперативный кэш Redis с авто-усечением вместо тяжелых запросов к Docker API.</li>
+                  <li><strong>Traceback Fingerprinting:</strong> Выделение первого non-framework фрейма из трейсбэков ошибок, дедупликация и ведение реестра ошибок (Error Registry) в Redis.</li>
+                  <li><strong>Auto-Recovery:</strong> Автоматическое закрытие инцидентов приложений при отсутствии новых повторений ошибок по таймауту затухания.</li>
+                  <li><strong>Временные ряды здоровья:</strong> Сбор показателей здоровья в Sorted Set в Redis и автоматический расчет трендов стабильности (<code>📈</code>, <code>📉</code>, <code>➡️</code>) на дашборде.</li>
+                  <li><strong>DooD (Docker-out-of-Docker):</strong> Полностью безопасное SRE-взаимодействие через сокет-прокси с жестким whitelist-контролем запросов.</li>
                 </ul>
               </div>
             </details>

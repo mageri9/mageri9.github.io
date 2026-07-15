@@ -1033,7 +1033,7 @@ AI Interpretation
               <span class="project-tag"><span class="dot"></span>LightGBM</span>
               <span class="project-tag"><span class="dot"></span>Walk-Forward ML</span>
               <span class="project-tag"><span class="dot"></span>Paper Trading</span>
-              <span class="project-tag"><span class="dot"></span>ccxt Engine</span>
+              <span class="project-tag"><span class="dot"></span>AsyncRLock</span>
             </div>
 
             <a class="card-action" href="https://github.com/mageri9/binance_quant_bot" target="_blank" rel="noopener noreferrer" aria-label="Открыть MarketMind на GitHub">
@@ -1055,11 +1055,13 @@ AI Interpretation
 [User / Bot UI] ◄── [Aiogram 3 (FSM + Redis)]</code></pre>
                 </div>
                 <ul class="arch-features">
-                  <li><strong>Валидация без утечек:</strong> Честная Walk-Forward нарезка данных (временные ряды) исключает заглядывание в будущее (leakage-free), что подтверждено строгим математическим тестом.</li>
+                  <li><strong>Валидация без утечек:</strong> Честная Walk-Forward нарезка данных (временные ряды) исключает заглядывание в будущее (leakage-free). Объем тренировочного пула увеличен до 1300 свечей, гарантируя запас под технические индикаторы и горизонт разметки.</li>
                   <li><strong>Защита от деградации ИИ:</strong> Автоматический пайплайн переобучения продвигает новую LightGBM-модель только если её метрика F1-score превосходит baseline (LogisticRegression) на том же прогоне.</li>
-                  <li><strong>Реалистичный симулятор:</strong> Движок Paper Trading с поддержкой стартового баланса ($10,000), комиссий биржи, ордеров Stop-Loss / Take-Profit и выходом по временному горизонту.</li>
-                  <li><strong>Аналитический блок:</strong> Интеграция профессионального расчета показателей эффективности стратегии: Win Rate, Profit Factor, коэффициентов Шарпа и Сортино, а также максимальной просадки (Max Drawdown).</li>
-                  <li><strong>DevOps & SRE:</strong> Полноценный CI/CD через GitHub Actions с авто-деплоем на VPS и глушением алертов мониторинга Nexus SRE на время перезапуска контейнера с помощью временных флагов в Redis.</li>
+                  <li><strong>Реалистичный симулятор (Multi-Asset):</strong> Движок Paper Trading с поддержкой стартового баланса ($10,000), комиссий биржи, ордеров Stop-Loss / Take-Profit и явным выходом по горизонту.</li>
+                  <li><strong>Потокобезопасность (Locking):</strong> Кастомный реентерабельный асинхронный лок (<code>AsyncRLock</code>) в репозитории и Double-Checked Locking предотвращают состояние гонки (lost updates) и дедлоки при одновременных сделках по разным символам.</li>
+                  <li><strong>Аналитика и SRE:</strong> Профессиональный расчет Win Rate, Profit Factor, Sharpe/Sortino, Max Drawdown. Надежный авто-откат модели на бэкапы с хронологической сортировкой по временным меткам имен файлов (независимо от mtime) и автоматической ротацией (хранение последних 5 копий).</li>
+                  <li><strong>Административная рассылка:</strong> Троттлинг в цикле <code>/broadcast</code> с задержкой 0.05 сек надежно предохраняет от лимита 429 (Too Many Requests) от Telegram API при рассылке по растущей базе пользователей.</li>
+                  <li><strong>DevOps & SRE Integration:</strong> CI/CD через GitHub Actions с авто-деплоем на VPS и глушением алертов мониторинга Nexus SRE на время перезапуска контейнера с помощью временных флагов в Redis.</li>
                 </ul>
               </div>
             </details>
@@ -1104,9 +1106,9 @@ AI Interpretation
                   <li><strong>Долговременная SRE-память:</strong> Собственная неблокирующая схема логов (<code>event_log</code>) и снимков метрик (<code>metric_snapshots</code>) на базе SQLite для ретроспективной аналитики.</li>
                   <li><strong>Динамический AIOps-анализ:</strong> Выявление статистических аномалий (Z-score) и предиктивное прогнозирование рисков инцидентов (CatBoost Classifier) с обучением по ночам через cron.</li>
                   <li><strong>Baseline-фильтр логов:</strong> Дискрепанс-гейт, сопоставляющий ИИ-риск с традиционными правилами. Алерты отправляются, только если ИИ видит скрытые аппаратные или логические угрозы.</li>
-                  <li><strong>Ring Buffer логов в Redis:</strong> Построчный захват логов контейнеров <code>docker logs -f</code> напрямую в оперативный кэш Redis с авто-усечением вместо тяжелых запросов к Docker API.</li>
+                  <li><strong>Ring Buffer логов in Redis:</strong> Построчный захват логов контейнеров <code>docker logs -f</code> напрямую в оперативный кэш Redis с авто-усечением вместо тяжелых запросов к Docker API.</li>
                   <li><strong>Traceback Fingerprinting & Auto-Recovery:</strong> Выделение первого non-framework фрейма, дедупликация ошибок в Redis и автозакрытие инцидентов приложений при отсутствии новых сбоев.</li>
-                  <li><strong>DooD (Docker-out-of-Docker):</strong> Полностью безопасное SRE-взаимодействие через сокет-прокси с жестким whitelist-контролем запросов.</li>
+                  <li><strong>DooD (Docker-out-of-Docker):</strong> Полностью SRE-взаимодействие через сокет-прокси с жестким whitelist-контролем запросов.</li>
                 </ul>
               </div>
             </details>
